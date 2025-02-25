@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-mongodb = "2.8.2"
+mongodb = "3.2.1"
 redis="0.28.2"
 actix-web = "4.9.0"
 actix-extra = "0.1.0"

@@ -1,6 +1,7 @@
 use actix::prelude::*;
 
+
 #[derive(Message)]
 #[rtype(result = "()")]
-pub struct wsmessage(pub String);
+pub struct message(pub String);
 

@@ -1,5 +1,5 @@
 use actix::prelude::*;
-use super::wsServer::Server;
+use super::server::Server;
 
 #[derive(Message)]
 #[rtype(result = "()")]
@@ -12,7 +12,8 @@ impl Handler<Disconnect> for Server {
     type Result = ();
 
     fn handle(&mut self, msg: Disconnect, _: &mut Context<Self>) {
-        println!("desconctado");
+       
+       self.sessions.write().unwrap().remove(&msg.id);
 
     }
 }
