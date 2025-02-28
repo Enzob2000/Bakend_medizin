@@ -4,8 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-mongodb = "3.2.1"
-redis="0.28.2"
+mongodb = "3.2.0"
+redis = { version = "0.29.0", features = ["tokio-comp"] }
 actix-web = "4.9.0"
 actix-extra = "0.1.0"
 serde = { version = "1.0", features = ["derive"] }

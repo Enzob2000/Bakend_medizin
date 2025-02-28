@@ -1,13 +1,8 @@
 use crate::JsonWebToken::jsonwebtoken::Claims;
 use serde::{Deserialize, Serialize};
 use actix_web::{ post, web, HttpResponse, };
+use InterfaceAdapters::DTO::login::Login;
 
-
-#[derive(Serialize, Deserialize)]
-struct LoginForm {
-    usuario: String,
-    password: String,
-}
 
 #[derive(Serialize, Deserialize)]
 struct LoginResult {
@@ -17,7 +12,7 @@ struct LoginResult {
 
 
 #[post("/login")]
-async fn login(form: web::Form<LoginForm>) -> HttpResponse {
+async fn login(form: web::Query<Login>) -> HttpResponse {
     if form.usuario != "rusty" && form.password != "fullstack" {
 
         return HttpResponse::Unauthorized().body("Login invalido")
