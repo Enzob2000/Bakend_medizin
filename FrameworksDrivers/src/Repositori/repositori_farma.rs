@@ -1,3 +1,4 @@
+use actix::fut::err;
 use mongodb::{
     bson::{doc, Document},
     error::Error,
@@ -5,14 +6,19 @@ use mongodb::{
     Client, Collection, Database,
 };
 
+use ApplicationLayer::Interface::Irepository::Irepository;
 use InterfaceAdapters::Model::model_farma::Model_farma;
 
 pub struct Repositori_farma {
     database: Database,
 }
 
-impl Repositori_farma {
-    pub async fn new() -> Self {
+impl Irepository for Repositori_farma {
+    type Error = mongodb::error::Error;
+    type Tinput = String;
+    type Touput = Model_farma;
+
+    async fn new() -> Self {
         // Replace the placeholder with your Atlas connection string
         let uri = "mongodb://localhost:27017";
 
@@ -27,24 +33,22 @@ impl Repositori_farma {
         Self { database }
     }
 
-    pub async fn search(&self, farmacias: Vec<String>) {
+    async fn search(&self, farmacias: Vec<Self::Tinput>) -> Result<Vec<Self::Touput>, Self::Error> {
+        let mut lista = vec![];
 
-        let mut lista=vec![];
+        let collection = self.database.collection::<Self::Touput>("farmacias");
 
-        let collection = self.database.collection::<Model_farma>("farmacias");
-
-        for farma in  farmacias.iter(){
-           
+        for farma in farmacias.iter().clone() {
             let filter = doc! {
-                "id": farma  
+                "id": farma
             };
 
-            let curso=collection.find_one(filter).await.unwrap();
+            let curso = collection.find_one(filter).await?;
 
-            if let Some(far)=curso{
-
+            if let Some(far) = curso {
                 lista.push(far);
             }
         }
+        Ok(lista)
     }
 }
