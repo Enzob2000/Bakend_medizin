@@ -12,29 +12,30 @@ pub struct Repositori_inv {
     database: Database,
 }
 
-impl Irepository for  Repositori_inv {
+
+
+impl  Repositori_inv {
+
+   pub async fn new(cliente:&Client,estado:&str) -> Self {
+        // Replace the placeholder with your Atlas connection string
+        // Get a handle on the movies collection
+        let database =cliente.database(estado) ;
+
+        Self { database }
+    }
+    
+}
+
+impl  Irepository for Repositori_inv {
 
     type Tinput = Pedido;
     type Touput = String;
     type Error = mongodb::error::Error;
 
 
-     async fn new() -> Self {
-        // Replace the placeholder with your Atlas connection string
-        let uri = "mongodb://localhost:27017";
+    
 
-        // Create a new client and connect to the server
-        let client = ClientOptions::parse(uri).await.unwrap();
-
-        let client = Client::with_options(client).unwrap();
-
-        // Get a handle on the movies collection
-        let database = client.database("pueba");
-
-        Self { database }
-    }
-
-    async fn search(&self, list_m: Vec<Self::Tinput>) ->Result< Vec<Self::Touput>,Error> {
+    async fn search(& mut self, list_m: Vec<Self::Tinput>) ->Result< Vec<Self::Touput>,Error> {
         let mut farma: Vec<String> = vec![];
 
         let list = self.database.list_collection_names().await?;

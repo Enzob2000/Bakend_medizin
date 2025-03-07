@@ -4,6 +4,6 @@ pub trait Irepository{
     type Touput;
     type Error;
 
-    async  fn new() ->Self;
-    async fn search(&self, list: Vec<Self::Tinput>) -> Result<Vec<Self::Touput>,Self::Error>;
+    
+    async fn search(& mut self, list: Vec<Self::Tinput>) -> Result<Vec<Self::Touput>,Self::Error>;
 }

@@ -13,11 +13,8 @@ pub struct Repositori_farma {
     database: Database,
 }
 
-impl Irepository for Repositori_farma {
-    type Error = mongodb::error::Error;
-    type Tinput = String;
-    type Touput = Model_farma;
 
+impl Repositori_farma {
     async fn new() -> Self {
         // Replace the placeholder with your Atlas connection string
         let uri = "mongodb://localhost:27017";
@@ -32,8 +29,16 @@ impl Irepository for Repositori_farma {
 
         Self { database }
     }
+}
 
-    async fn search(&self, farmacias: Vec<Self::Tinput>) -> Result<Vec<Self::Touput>, Self::Error> {
+impl Irepository for Repositori_farma {
+    type Error = mongodb::error::Error;
+    type Tinput = String;
+    type Touput = Model_farma;
+
+  
+
+    async fn search(& mut self, farmacias: Vec<Self::Tinput>) -> Result<Vec<Self::Touput>, Self::Error> {
         let mut lista = vec![];
 
         let collection = self.database.collection::<Self::Touput>("farmacias");
