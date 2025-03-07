@@ -1,75 +1,86 @@
-use actix::fut::ok;
+use futures::future::join_all;
+use futures::stream::{self, StreamExt}; // Para buffering y streams
 use mongodb::{
     bson::{doc, Document},
     error::Error,
-    options::ClientOptions,
-    Client, Collection, Database,
+    Collection, Database,
 };
-use InterfaceAdapters::Model::model_inventory::{self, Model_inventory};
-use InterfaceAdapters::DTO::pedido::Pedido;
 use ApplicationLayer::Interface::Irepository::Irepository;
+use InterfaceAdapters::{
+    Model::model_inventory::Model_inventory,
+    DTO::pedido::{Medicamento, Pedido},
+};
+
+// Asumiendo que la estructura y demás código ya se definieron
 pub struct Repositori_inv {
     database: Database,
 }
 
-
-
-impl  Repositori_inv {
-
-   pub async fn new(cliente:&Client,estado:&str) -> Self {
-        // Replace the placeholder with your Atlas connection string
-        // Get a handle on the movies collection
-        let database =cliente.database(estado) ;
-
+impl Repositori_inv {
+    pub async fn new(cliente: &mongodb::Client, estado: &str) -> Self {
+        let database = cliente.database(estado);
         Self { database }
     }
-    
 }
 
-impl  Irepository for Repositori_inv {
-
-    type Tinput = Pedido;
+impl Irepository for Repositori_inv {
+    type Tinput = Medicamento;
     type Touput = String;
-    type Error = mongodb::error::Error;
+    type Error = Error;
 
+    async fn search(&mut self, list_m: Vec<Self::Tinput>) -> Result<Vec<Self::Touput>, Error> {
+        // Obtener la lista de nombres de colección (cada farmacia)
+        let pharmacies = self.database.list_collection_names().await?;
 
-    
+        // Para cada farmacia, creamos una tarea asíncrona que verificará que se encuentren todos los medicamentos
+        let pharmacy_tasks = pharmacies.into_iter().map(|pharmacy| {
+            let collection: Collection<Model_inventory> = self.database.collection(&pharmacy);
+            // Clonamos la lista de medicamentos para cada tarea.
+            let meds = list_m.clone();
+            async move {
+                // Disparamos de forma concurrente las búsquedas de cada medicamento en la farmacia actual.
+                let med_futures = meds.into_iter().map(|med| {
+                    let filter = doc! {
+                        "and$":{
+                        "nombre": { "$regex": med.medicamento, "$options": "i" },
+                        "cantidad": { "$gte": med.cantidad }}
+                    };
+                    async {
+                        // Si se encuentra algún error o no existe el documento, se refleja en el resultado.
+                        collection.find_one(filter).await
+                    }
+                });
+                // Ejecutamos todas las búsquedas de medicamentos en paralelo.
+                let med_results = join_all(med_futures).await;
 
-    async fn search(& mut self, list_m: Vec<Self::Tinput>) ->Result< Vec<Self::Touput>,Error> {
-        let mut farma: Vec<String> = vec![];
-
-        let list = self.database.list_collection_names().await?;
-
-        for pharmacy in list.iter() {
-            let mut cont = 0;
-            let collection = self.database.collection::<Model_inventory>(pharmacy);
-
-            for medicines in list_m.iter() {
-
-                let cantidad=medicines.cantidad;
-                let medicina=medicines.medicamento.clone();
-
-                let filter = doc! {
-                    "nombre": { "$regex":medicina , "$options": "i" },
-                     "cantidad": { "$gte": cantidad }
-                };
-
-                let cursor = collection.find_one(filter).await?;
-
-                let Some(_) = cursor else {
-                    cont = 0;
-
-                    break;
-                };
-
-                cont = cont + 1;
+                // Verificamos que cada búsqueda haya retornado algún documento
+                for res in med_results {
+                    match res {
+                        Ok(Some(_)) => continue,     // Se encontró el medicamento
+                        Ok(None) => return Ok(None), // Falta algún medicamento, esta farmacia no cumple el criterio
+                        Err(e) => return Err(e),     // Propagamos cualquier error
+                    }
+                }
+                // Si llegó hasta aquí, es porque en esta farmacia se encontraron todos los medicamentos
+                Ok(Some(pharmacy))
             }
+        });
 
-            if cont == list_m.len() {
-                farma.push(pharmacy.to_owned());
+        // Ejecutamos las tareas de farmacia en paralelo, limitando la concurrencia para evitar saturar conexiones
+        let results = stream::iter(pharmacy_tasks)
+            .buffer_unordered(10) // Ajusta el número según tu contexto (por ejemplo, número de conexiones disponibles)
+            .collect::<Vec<_>>()
+            .await;
+
+        // Procesamos los resultados: filtramos las farmacias válidas y propagamos errores si ocurrieron
+        let mut farma = Vec::new();
+        for result in results {
+            match result {
+                Ok(Some(pharmacy)) => farma.push(pharmacy),
+                Ok(None) => (),          // La farmacia no cumplió con los criterios
+                Err(e) => return Err(e), // Propagamos error desde cualquiera de las búsquedas
             }
         }
-    
         Ok(farma)
     }
 }

@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize,Clone)]
 pub struct Medicamento {
     pub medicamento: String,
     pub cantidad: i32,
@@ -15,7 +15,7 @@ pub struct Ubicacion {
 #[derive(Serialize, Deserialize)]
 
 pub struct Pedido {
-    pub id: String,
+    pub id_cliente:String,
     pub nombre: String,
     pub direccion: String,
     pub geolocalizacion: Ubicacion,

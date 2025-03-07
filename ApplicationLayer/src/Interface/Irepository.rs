@@ -1,4 +1,4 @@
-pub trait Irepository{
+pub trait Irepository:Send+Sync{
     
     type Tinput;
     type Touput;
