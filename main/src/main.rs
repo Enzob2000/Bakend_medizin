@@ -1,11 +1,48 @@
 
-use  FrameworksDrivers::{Api::Server::server};
+use std::{sync::Arc, time::Instant, vec};
+use ApplicationLayer::Interface::Irepository::Irepository;
+use  FrameworksDrivers::{Api::Server::server,Repositori::factory_repository_inventary::factory_repository::Factory_repository};
+use InterfaceAdapters::DTO::pedido::Medicamento;
 
 
 #[actix_web::main]
-async fn main() {
+ async fn main() {
     
-//server().await;
+    let inicio=Instant::now();
+//server().
+let mut factory_q=Factory_repository::new(vec!["pueba"]).await;
+
+let estado=factory_q.get_estado("pueba").unwrap();
+
+//estado.indexar().await;
+
+
+let lista_medi=vec![("paracetamol".to_string(),10),("Lisinopril".to_string(),20),("Azitromicina".to_string(),12)];
+
+let mut list=Vec::new();
+
+for (i,j) in lista_medi.into_iter(){
+
+let medicamentos=Medicamento{medicamento:i,cantidad:j};
+
+list.push(medicamentos);
+    
+}
+
+
+let resultado =estado.search(list).await.unwrap();
+
+println!("{:?}",resultado);
+
+let  time=inicio.elapsed();
+
+println!("duracion de {:?}",time);
+
+
+
+
+
+
 
 
 }

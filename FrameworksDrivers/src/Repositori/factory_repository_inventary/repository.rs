@@ -1,5 +1,10 @@
+use std::sync;
+
 use futures::future::join_all;
-use futures::stream::{self, StreamExt}; // Para buffering y streams
+use futures::stream::{self, StreamExt};
+use mongodb::options::{Collation, CollationAlternate, CollationCaseFirst, CollationMaxVariable, IndexOptions,CollationStrength};
+use mongodb::IndexModel;
+// Para buffering y streams
 use mongodb::{
     bson::{doc, Document},
     error::Error,
@@ -21,6 +26,33 @@ impl Repositori_inv {
         let database = cliente.database(estado);
         Self { database }
     }
+
+    pub async fn indexar(&self) {
+        let pharmacies = self.database.list_collection_names().await.unwrap();
+
+        let index_model = IndexModel::builder()
+        .keys(doc! {
+            "nombre": 1,
+            "cantidad": 1
+        })
+        .options(
+            IndexOptions::builder()
+                .collation(
+                    Some(Collation::builder()
+                        .locale("es".to_string())
+                        .strength(CollationStrength::Primary)  // Ignora mayúsculas/minúsculas
+                        .build())
+                )
+                .build()
+        )
+        .build();
+
+        for i in pharmacies.into_iter() {
+            let collection: Collection<Model_inventory> = self.database.collection(&i);
+
+            let res = collection.create_index(index_model.clone()).await.unwrap();
+        }
+    }
 }
 
 impl Irepository for Repositori_inv {
@@ -35,15 +67,18 @@ impl Irepository for Repositori_inv {
         // Para cada farmacia, creamos una tarea asíncrona que verificará que se encuentren todos los medicamentos
         let pharmacy_tasks = pharmacies.into_iter().map(|pharmacy| {
             let collection: Collection<Model_inventory> = self.database.collection(&pharmacy);
+
             // Clonamos la lista de medicamentos para cada tarea.
             let meds = list_m.clone();
             async move {
                 // Disparamos de forma concurrente las búsquedas de cada medicamento en la farmacia actual.
                 let med_futures = meds.into_iter().map(|med| {
                     let filter = doc! {
-                        "and$":{
+                        "$and":[doc! {
                         "nombre": { "$regex": med.medicamento, "$options": "i" },
-                        "cantidad": { "$gte": med.cantidad }}
+                        "cantidad": { "$gte": med.cantidad }
+                        }
+                        ]
                     };
                     async {
                         // Si se encuentra algún error o no existe el documento, se refleja en el resultado.

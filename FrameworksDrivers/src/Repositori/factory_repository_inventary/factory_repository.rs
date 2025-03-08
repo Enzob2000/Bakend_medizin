@@ -1,42 +1,35 @@
-use std::collections::HashMap;
-use super::repository::Repositori_inv;
+use ApplicationLayer::Interface::Irepository::Irepository;
+
 use super::cliente::Clienteoption;
+use super::repository::Repositori_inv;
+use std::collections::HashMap;
 
-
-struct Factory_repository{
-    state:HashMap<String,Repositori_inv>
-
+pub struct Factory_repository {
+    pub state: HashMap<String, Repositori_inv>,
 }
 
-
 impl Factory_repository {
+    pub async fn new(estados: Vec<&str>) -> Self {
+        let mut states = HashMap::new();
+
+        let cliente = Clienteoption::new().await.unwrap();
+
+        for estado in estados {
+            let new = Repositori_inv::new(&cliente.cliente, estado).await;
 
 
-    pub async fn new(estados:Vec<&str>)->Self{
+            states.insert(estado.to_owned(), new);
+        }
 
-    let mut states=HashMap::new();
+        Self { state: states }
+    }
 
-    let cliente=Clienteoption::new().await.unwrap();
+    pub  fn get_estado(&mut self, estado: &str) -> Option<&mut Repositori_inv> {
+        
+        self.state.get_mut(estado)
+        
+        
 
-    for estado in estados  {
-
-
-        let new=Repositori_inv::new(&cliente.cliente, estado).await;
-
-        states.insert(estado.to_owned(), new);
         
     }
-
-    Self{state:states}
-
-    }
-
-    pub async fn get(&self,estado:&str)->Option<&Repositori_inv>{
-
-
-    self.state.get(estado)
-
-
-    }
-    
 }
