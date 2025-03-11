@@ -1,17 +1,23 @@
-use std::{collections::{HashMap}, sync::{Arc, RwLock}};
+use std::{collections::HashMap, sync::{Arc, Mutex, RwLock}};
 use actix::{Actor, Context, Recipient};
 use super::message::message;
 
 
 #[derive(Debug)]
 pub struct Server {
-   pub sessions:Arc<RwLock<HashMap<usize, Recipient<message>>>>,
+   pub farmacias:Arc<Mutex<HashMap<String, Recipient<message>>>>,
+   pub raideris:Arc<Mutex<HashMap<String, Recipient<message>>>>,
+   pub clientes:Arc<Mutex<HashMap<String, Recipient<message>>>>,
+
 }
 
 impl Server {
     pub fn new()->Self{
      Self{
-     sessions:Arc::new(RwLock::new(HashMap::new()))
+     farmacias:Arc::new(Mutex::new(HashMap::new())),
+     raideris:Arc::new(Mutex::new(HashMap::new())),
+     clientes:Arc::new(Mutex::new(HashMap::new()))
+     
      }
 
     }

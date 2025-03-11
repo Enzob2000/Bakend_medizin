@@ -1,4 +1,5 @@
-use std::sync;
+use std::{fs, sync};
+
 
 use futures::future::join_all;
 use futures::stream::{self, StreamExt};
@@ -35,22 +36,13 @@ impl Repositori_inv {
             "nombre": 1,
             "cantidad": 1
         })
-        .options(
-            IndexOptions::builder()
-                .collation(
-                    Some(Collation::builder()
-                        .locale("es".to_string())
-                        .strength(CollationStrength::Primary)  // Ignora mayúsculas/minúsculas
-                        .build())
-                )
-                .build()
-        )
         .build();
 
         for i in pharmacies.into_iter() {
             let collection: Collection<Model_inventory> = self.database.collection(&i);
 
             let res = collection.create_index(index_model.clone()).await.unwrap();
+            println!("{}     {:?}",i,res)
         }
     }
 }
@@ -73,9 +65,12 @@ impl Irepository for Repositori_inv {
             async move {
                 // Disparamos de forma concurrente las búsquedas de cada medicamento en la farmacia actual.
                 let med_futures = meds.into_iter().map(|med| {
+
+                   let medicamento=format!("^{}",med.medicamento);
+
                     let filter = doc! {
                         "$and":[doc! {
-                        "nombre": { "$regex": med.medicamento, "$options": "i" },
+                        "nombre": { "$regex": medicamento },
                         "cantidad": { "$gte": med.cantidad }
                         }
                         ]
@@ -103,7 +98,7 @@ impl Irepository for Repositori_inv {
 
         // Ejecutamos las tareas de farmacia en paralelo, limitando la concurrencia para evitar saturar conexiones
         let results = stream::iter(pharmacy_tasks)
-            .buffer_unordered(10) // Ajusta el número según tu contexto (por ejemplo, número de conexiones disponibles)
+            .buffer_unordered(20) // Ajusta el número según tu contexto (por ejemplo, número de conexiones disponibles)
             .collect::<Vec<_>>()
             .await;
 
@@ -119,3 +114,4 @@ impl Irepository for Repositori_inv {
         Ok(farma)
     }
 }
+

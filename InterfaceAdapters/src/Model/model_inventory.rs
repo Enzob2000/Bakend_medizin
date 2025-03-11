@@ -1,6 +1,8 @@
+use std::clone;
+
 use serde::{Deserialize,Serialize};
 
-#[derive(Deserialize,Serialize)]
+#[derive(Deserialize,Serialize,Clone)]
 pub struct Model_inventory {
     pub idd: u16,
     pub nombre: String,

@@ -3,21 +3,20 @@ use std::{sync::Arc, time::Instant, vec};
 use ApplicationLayer::Interface::Irepository::Irepository;
 use  FrameworksDrivers::{Api::Server::server,Repositori::factory_repository_inventary::factory_repository::Factory_repository};
 use InterfaceAdapters::DTO::pedido::Medicamento;
+use std::io;
 
 
 #[actix_web::main]
  async fn main() {
     
-    let inicio=Instant::now();
+let inicio=Instant::now();
 //server().
 let mut factory_q=Factory_repository::new(vec!["pueba"]).await;
 
 let estado=factory_q.get_estado("pueba").unwrap();
 
-//estado.indexar().await;
 
-
-let lista_medi=vec![("paracetamol".to_string(),10),("Lisinopril".to_string(),20),("Azitromicina".to_string(),12)];
+let lista_medi=vec![("Paracetamol".to_string(),10),("Lisinopril".to_string(),20),("Azitromicina".to_string(),12)];
 
 let mut list=Vec::new();
 
@@ -30,6 +29,7 @@ list.push(medicamentos);
 }
 
 
+
 let resultado =estado.search(list).await.unwrap();
 
 println!("{:?}",resultado);
@@ -37,9 +37,6 @@ println!("{:?}",resultado);
 let  time=inicio.elapsed();
 
 println!("duracion de {:?}",time);
-
-
-
 
 
 
