@@ -3,8 +3,8 @@
     "nombre": "Farmacia Central",
     "numero_telef": "555-1234567",
     "direccion": "Av. Siempre Viva 742",
-    "latitud": 41325678901234567890,
-    "longitud": 22345678901234567890,
+    "latitud": 4.1325678901234567890,
+    "longitud": 2.2345678901234567890,
     "inventario": [
       { "idd": 1, "nombre": "Producto 1", "categoria": "Categoría A", "cantidad": 11, "precio": 5.5 },
       { "idd": 2, "nombre": "Producto 2", "categoria": "Categoría B", "cantidad": 12, "precio": 6.0 },

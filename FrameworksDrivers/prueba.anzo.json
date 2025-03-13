@@ -1,0 +1,1413 @@
+[{
+  "_id": {
+    "$oid": "67d23afc8f4135909323a5a7"
+  },
+  "id": "farmacia_001",
+  "nombre": "Farmacia Central",
+  "numero_telef": "555-1234567",
+  "direccion": "Av. Siempre Viva 742",
+  "latitud": 4.132567890123457,
+  "longitud": 2.234567890123457,
+  "inventario": [
+    {
+      "idd": 1,
+      "nombre": "Producto 1",
+      "categoria": "Categoría A",
+      "cantidad": 11,
+      "precio": 5.5
+    },
+    {
+      "idd": 2,
+      "nombre": "Producto 2",
+      "categoria": "Categoría B",
+      "cantidad": 12,
+      "precio": 6
+    },
+    {
+      "idd": 3,
+      "nombre": "Producto 3",
+      "categoria": "Categoría C",
+      "cantidad": 13,
+      "precio": 6.5
+    },
+    {
+      "idd": 4,
+      "nombre": "Producto 4",
+      "categoria": "Categoría A",
+      "cantidad": 14,
+      "precio": 7
+    },
+    {
+      "idd": 5,
+      "nombre": "Producto 5",
+      "categoria": "Categoría B",
+      "cantidad": 15,
+      "precio": 7.5
+    },
+    {
+      "idd": 6,
+      "nombre": "Producto 6",
+      "categoria": "Categoría C",
+      "cantidad": 16,
+      "precio": 8
+    },
+    {
+      "idd": 7,
+      "nombre": "Producto 7",
+      "categoria": "Categoría A",
+      "cantidad": 17,
+      "precio": 8.5
+    },
+    {
+      "idd": 8,
+      "nombre": "Producto 8",
+      "categoria": "Categoría B",
+      "cantidad": 18,
+      "precio": 9
+    },
+    {
+      "idd": 9,
+      "nombre": "Producto 9",
+      "categoria": "Categoría C",
+      "cantidad": 19,
+      "precio": 9.5
+    },
+    {
+      "idd": 10,
+      "nombre": "Producto 10",
+      "categoria": "Categoría A",
+      "cantidad": 10,
+      "precio": 10
+    },
+    {
+      "idd": 11,
+      "nombre": "Producto 11",
+      "categoria": "Categoría B",
+      "cantidad": 11,
+      "precio": 10.5
+    },
+    {
+      "idd": 12,
+      "nombre": "Producto 12",
+      "categoria": "Categoría C",
+      "cantidad": 12,
+      "precio": 11
+    },
+    {
+      "idd": 13,
+      "nombre": "Producto 13",
+      "categoria": "Categoría A",
+      "cantidad": 13,
+      "precio": 11.5
+    },
+    {
+      "idd": 14,
+      "nombre": "Producto 14",
+      "categoria": "Categoría B",
+      "cantidad": 14,
+      "precio": 12
+    },
+    {
+      "idd": 15,
+      "nombre": "Producto 15",
+      "categoria": "Categoría C",
+      "cantidad": 15,
+      "precio": 12.5
+    },
+    {
+      "idd": 16,
+      "nombre": "Producto 16",
+      "categoria": "Categoría A",
+      "cantidad": 16,
+      "precio": 13
+    },
+    {
+      "idd": 17,
+      "nombre": "Producto 17",
+      "categoria": "Categoría B",
+      "cantidad": 17,
+      "precio": 13.5
+    },
+    {
+      "idd": 18,
+      "nombre": "Producto 18",
+      "categoria": "Categoría C",
+      "cantidad": 18,
+      "precio": 14
+    },
+    {
+      "idd": 19,
+      "nombre": "Producto 19",
+      "categoria": "Categoría A",
+      "cantidad": 19,
+      "precio": 14.5
+    },
+    {
+      "idd": 20,
+      "nombre": "Producto 20",
+      "categoria": "Categoría B",
+      "cantidad": 10,
+      "precio": 15
+    },
+    {
+      "idd": 21,
+      "nombre": "Producto 21",
+      "categoria": "Categoría C",
+      "cantidad": 11,
+      "precio": 15.5
+    },
+    {
+      "idd": 22,
+      "nombre": "Producto 22",
+      "categoria": "Categoría A",
+      "cantidad": 12,
+      "precio": 16
+    },
+    {
+      "idd": 23,
+      "nombre": "Producto 23",
+      "categoria": "Categoría B",
+      "cantidad": 13,
+      "precio": 16.5
+    },
+    {
+      "idd": 24,
+      "nombre": "Producto 24",
+      "categoria": "Categoría C",
+      "cantidad": 14,
+      "precio": 17
+    },
+    {
+      "idd": 25,
+      "nombre": "Producto 25",
+      "categoria": "Categoría A",
+      "cantidad": 15,
+      "precio": 17.5
+    },
+    {
+      "idd": 26,
+      "nombre": "Producto 26",
+      "categoria": "Categoría B",
+      "cantidad": 16,
+      "precio": 18
+    },
+    {
+      "idd": 27,
+      "nombre": "Producto 27",
+      "categoria": "Categoría C",
+      "cantidad": 17,
+      "precio": 18.5
+    },
+    {
+      "idd": 28,
+      "nombre": "Producto 28",
+      "categoria": "Categoría A",
+      "cantidad": 18,
+      "precio": 19
+    },
+    {
+      "idd": 29,
+      "nombre": "Producto 29",
+      "categoria": "Categoría B",
+      "cantidad": 19,
+      "precio": 19.5
+    },
+    {
+      "idd": 30,
+      "nombre": "Producto 30",
+      "categoria": "Categoría C",
+      "cantidad": 10,
+      "precio": 20
+    },
+    {
+      "idd": 31,
+      "nombre": "Producto 31",
+      "categoria": "Categoría A",
+      "cantidad": 11,
+      "precio": 20.5
+    },
+    {
+      "idd": 32,
+      "nombre": "Producto 32",
+      "categoria": "Categoría B",
+      "cantidad": 12,
+      "precio": 21
+    },
+    {
+      "idd": 33,
+      "nombre": "Producto 33",
+      "categoria": "Categoría C",
+      "cantidad": 13,
+      "precio": 21.5
+    },
+    {
+      "idd": 34,
+      "nombre": "Producto 34",
+      "categoria": "Categoría A",
+      "cantidad": 14,
+      "precio": 22
+    },
+    {
+      "idd": 35,
+      "nombre": "Producto 35",
+      "categoria": "Categoría B",
+      "cantidad": 15,
+      "precio": 22.5
+    },
+    {
+      "idd": 36,
+      "nombre": "Producto 36",
+      "categoria": "Categoría C",
+      "cantidad": 16,
+      "precio": 23
+    },
+    {
+      "idd": 37,
+      "nombre": "Producto 37",
+      "categoria": "Categoría A",
+      "cantidad": 17,
+      "precio": 23.5
+    },
+    {
+      "idd": 38,
+      "nombre": "Producto 38",
+      "categoria": "Categoría B",
+      "cantidad": 18,
+      "precio": 24
+    },
+    {
+      "idd": 39,
+      "nombre": "Producto 39",
+      "categoria": "Categoría C",
+      "cantidad": 19,
+      "precio": 24.5
+    },
+    {
+      "idd": 40,
+      "nombre": "Producto 40",
+      "categoria": "Categoría A",
+      "cantidad": 10,
+      "precio": 25
+    },
+    {
+      "idd": 41,
+      "nombre": "Producto 41",
+      "categoria": "Categoría B",
+      "cantidad": 11,
+      "precio": 25.5
+    },
+    {
+      "idd": 42,
+      "nombre": "Producto 42",
+      "categoria": "Categoría C",
+      "cantidad": 12,
+      "precio": 26
+    },
+    {
+      "idd": 43,
+      "nombre": "Producto 43",
+      "categoria": "Categoría A",
+      "cantidad": 13,
+      "precio": 26.5
+    },
+    {
+      "idd": 44,
+      "nombre": "Producto 44",
+      "categoria": "Categoría B",
+      "cantidad": 14,
+      "precio": 27
+    },
+    {
+      "idd": 45,
+      "nombre": "Producto 45",
+      "categoria": "Categoría C",
+      "cantidad": 15,
+      "precio": 27.5
+    },
+    {
+      "idd": 46,
+      "nombre": "Producto 46",
+      "categoria": "Categoría A",
+      "cantidad": 16,
+      "precio": 28
+    },
+    {
+      "idd": 47,
+      "nombre": "Producto 47",
+      "categoria": "Categoría B",
+      "cantidad": 17,
+      "precio": 28.5
+    },
+    {
+      "idd": 48,
+      "nombre": "Producto 48",
+      "categoria": "Categoría C",
+      "cantidad": 18,
+      "precio": 29
+    },
+    {
+      "idd": 49,
+      "nombre": "Producto 49",
+      "categoria": "Categoría A",
+      "cantidad": 19,
+      "precio": 29.5
+    },
+    {
+      "idd": 50,
+      "nombre": "Producto 50",
+      "categoria": "Categoría B",
+      "cantidad": 10,
+      "precio": 30
+    },
+    {
+      "idd": 51,
+      "nombre": "Producto 51",
+      "categoria": "Categoría C",
+      "cantidad": 11,
+      "precio": 30.5
+    },
+    {
+      "idd": 52,
+      "nombre": "Producto 52",
+      "categoria": "Categoría A",
+      "cantidad": 12,
+      "precio": 31
+    },
+    {
+      "idd": 53,
+      "nombre": "Producto 53",
+      "categoria": "Categoría B",
+      "cantidad": 13,
+      "precio": 31.5
+    },
+    {
+      "idd": 54,
+      "nombre": "Producto 54",
+      "categoria": "Categoría C",
+      "cantidad": 14,
+      "precio": 32
+    },
+    {
+      "idd": 55,
+      "nombre": "Producto 55",
+      "categoria": "Categoría A",
+      "cantidad": 15,
+      "precio": 32.5
+    },
+    {
+      "idd": 56,
+      "nombre": "Producto 56",
+      "categoria": "Categoría B",
+      "cantidad": 16,
+      "precio": 33
+    },
+    {
+      "idd": 57,
+      "nombre": "Producto 57",
+      "categoria": "Categoría C",
+      "cantidad": 17,
+      "precio": 33.5
+    },
+    {
+      "idd": 58,
+      "nombre": "Producto 58",
+      "categoria": "Categoría A",
+      "cantidad": 18,
+      "precio": 34
+    },
+    {
+      "idd": 59,
+      "nombre": "Producto 59",
+      "categoria": "Categoría B",
+      "cantidad": 19,
+      "precio": 34.5
+    },
+    {
+      "idd": 60,
+      "nombre": "Producto 60",
+      "categoria": "Categoría C",
+      "cantidad": 10,
+      "precio": 35
+    },
+    {
+      "idd": 61,
+      "nombre": "Producto 61",
+      "categoria": "Categoría A",
+      "cantidad": 11,
+      "precio": 35.5
+    },
+    {
+      "idd": 62,
+      "nombre": "Producto 62",
+      "categoria": "Categoría B",
+      "cantidad": 12,
+      "precio": 36
+    },
+    {
+      "idd": 63,
+      "nombre": "Producto 63",
+      "categoria": "Categoría C",
+      "cantidad": 13,
+      "precio": 36.5
+    },
+    {
+      "idd": 64,
+      "nombre": "Producto 64",
+      "categoria": "Categoría A",
+      "cantidad": 14,
+      "precio": 37
+    },
+    {
+      "idd": 65,
+      "nombre": "Producto 65",
+      "categoria": "Categoría B",
+      "cantidad": 15,
+      "precio": 37.5
+    },
+    {
+      "idd": 66,
+      "nombre": "Producto 66",
+      "categoria": "Categoría C",
+      "cantidad": 16,
+      "precio": 38
+    },
+    {
+      "idd": 67,
+      "nombre": "Producto 67",
+      "categoria": "Categoría A",
+      "cantidad": 17,
+      "precio": 38.5
+    },
+    {
+      "idd": 68,
+      "nombre": "Producto 68",
+      "categoria": "Categoría B",
+      "cantidad": 18,
+      "precio": 39
+    },
+    {
+      "idd": 69,
+      "nombre": "Producto 69",
+      "categoria": "Categoría C",
+      "cantidad": 19,
+      "precio": 39.5
+    },
+    {
+      "idd": 70,
+      "nombre": "Producto 70",
+      "categoria": "Categoría A",
+      "cantidad": 10,
+      "precio": 40
+    },
+    {
+      "idd": 71,
+      "nombre": "Producto 71",
+      "categoria": "Categoría B",
+      "cantidad": 11,
+      "precio": 40.5
+    },
+    {
+      "idd": 72,
+      "nombre": "Producto 72",
+      "categoria": "Categoría C",
+      "cantidad": 12,
+      "precio": 41
+    },
+    {
+      "idd": 73,
+      "nombre": "Producto 73",
+      "categoria": "Categoría A",
+      "cantidad": 13,
+      "precio": 41.5
+    },
+    {
+      "idd": 74,
+      "nombre": "Producto 74",
+      "categoria": "Categoría B",
+      "cantidad": 14,
+      "precio": 42
+    },
+    {
+      "idd": 75,
+      "nombre": "Producto 75",
+      "categoria": "Categoría C",
+      "cantidad": 15,
+      "precio": 42.5
+    },
+    {
+      "idd": 76,
+      "nombre": "Producto 76",
+      "categoria": "Categoría A",
+      "cantidad": 16,
+      "precio": 43
+    },
+    {
+      "idd": 77,
+      "nombre": "Producto 77",
+      "categoria": "Categoría B",
+      "cantidad": 17,
+      "precio": 43.5
+    },
+    {
+      "idd": 78,
+      "nombre": "Producto 78",
+      "categoria": "Categoría C",
+      "cantidad": 18,
+      "precio": 44
+    },
+    {
+      "idd": 79,
+      "nombre": "Producto 79",
+      "categoria": "Categoría A",
+      "cantidad": 19,
+      "precio": 44.5
+    },
+    {
+      "idd": 80,
+      "nombre": "Producto 80",
+      "categoria": "Categoría B",
+      "cantidad": 10,
+      "precio": 45
+    },
+    {
+      "idd": 81,
+      "nombre": "Producto 81",
+      "categoria": "Categoría C",
+      "cantidad": 11,
+      "precio": 45.5
+    },
+    {
+      "idd": 82,
+      "nombre": "Producto 82",
+      "categoria": "Categoría A",
+      "cantidad": 12,
+      "precio": 46
+    },
+    {
+      "idd": 83,
+      "nombre": "Producto 83",
+      "categoria": "Categoría B",
+      "cantidad": 13,
+      "precio": 46.5
+    },
+    {
+      "idd": 84,
+      "nombre": "Producto 84",
+      "categoria": "Categoría C",
+      "cantidad": 14,
+      "precio": 47
+    },
+    {
+      "idd": 85,
+      "nombre": "Producto 85",
+      "categoria": "Categoría A",
+      "cantidad": 15,
+      "precio": 47.5
+    },
+    {
+      "idd": 86,
+      "nombre": "Producto 86",
+      "categoria": "Categoría B",
+      "cantidad": 16,
+      "precio": 48
+    },
+    {
+      "idd": 87,
+      "nombre": "Producto 87",
+      "categoria": "Categoría C",
+      "cantidad": 17,
+      "precio": 48.5
+    },
+    {
+      "idd": 88,
+      "nombre": "Producto 88",
+      "categoria": "Categoría A",
+      "cantidad": 18,
+      "precio": 49
+    },
+    {
+      "idd": 89,
+      "nombre": "Producto 89",
+      "categoria": "Categoría B",
+      "cantidad": 19,
+      "precio": 49.5
+    },
+    {
+      "idd": 90,
+      "nombre": "Producto 90",
+      "categoria": "Categoría C",
+      "cantidad": 10,
+      "precio": 50
+    },
+    {
+      "idd": 91,
+      "nombre": "Producto 91",
+      "categoria": "Categoría A",
+      "cantidad": 11,
+      "precio": 50.5
+    },
+    {
+      "idd": 92,
+      "nombre": "Producto 92",
+      "categoria": "Categoría B",
+      "cantidad": 12,
+      "precio": 51
+    },
+    {
+      "idd": 93,
+      "nombre": "Producto 93",
+      "categoria": "Categoría C",
+      "cantidad": 13,
+      "precio": 51.5
+    },
+    {
+      "idd": 94,
+      "nombre": "Producto 94",
+      "categoria": "Categoría A",
+      "cantidad": 14,
+      "precio": 52
+    },
+    {
+      "idd": 95,
+      "nombre": "Producto 95",
+      "categoria": "Categoría B",
+      "cantidad": 15,
+      "precio": 52.5
+    },
+    {
+      "idd": 96,
+      "nombre": "Producto 96",
+      "categoria": "Categoría C",
+      "cantidad": 16,
+      "precio": 53
+    },
+    {
+      "idd": 97,
+      "nombre": "Producto 97",
+      "categoria": "Categoría A",
+      "cantidad": 17,
+      "precio": 53.5
+    },
+    {
+      "idd": 98,
+      "nombre": "Producto 98",
+      "categoria": "Categoría B",
+      "cantidad": 18,
+      "precio": 54
+    },
+    {
+      "idd": 99,
+      "nombre": "Producto 99",
+      "categoria": "Categoría C",
+      "cantidad": 19,
+      "precio": 54.5
+    },
+    {
+      "idd": 100,
+      "nombre": "Producto 100",
+      "categoria": "Categoría A",
+      "cantidad": 10,
+      "precio": 55
+    },
+    {
+      "idd": 101,
+      "nombre": "Producto 101",
+      "categoria": "Categoría B",
+      "cantidad": 11,
+      "precio": 55.5
+    },
+    {
+      "idd": 102,
+      "nombre": "Producto 102",
+      "categoria": "Categoría C",
+      "cantidad": 12,
+      "precio": 56
+    },
+    {
+      "idd": 103,
+      "nombre": "Producto 103",
+      "categoria": "Categoría A",
+      "cantidad": 13,
+      "precio": 56.5
+    },
+    {
+      "idd": 104,
+      "nombre": "Producto 104",
+      "categoria": "Categoría B",
+      "cantidad": 14,
+      "precio": 57
+    },
+    {
+      "idd": 105,
+      "nombre": "Producto 105",
+      "categoria": "Categoría C",
+      "cantidad": 15,
+      "precio": 57.5
+    },
+    {
+      "idd": 106,
+      "nombre": "Producto 106",
+      "categoria": "Categoría A",
+      "cantidad": 16,
+      "precio": 58
+    },
+    {
+      "idd": 107,
+      "nombre": "Producto 107",
+      "categoria": "Categoría B",
+      "cantidad": 17,
+      "precio": 58.5
+    },
+    {
+      "idd": 108,
+      "nombre": "Producto 108",
+      "categoria": "Categoría C",
+      "cantidad": 18,
+      "precio": 59
+    },
+    {
+      "idd": 109,
+      "nombre": "Producto 109",
+      "categoria": "Categoría A",
+      "cantidad": 19,
+      "precio": 59.5
+    },
+    {
+      "idd": 110,
+      "nombre": "Producto 110",
+      "categoria": "Categoría B",
+      "cantidad": 10,
+      "precio": 60
+    },
+    {
+      "idd": 111,
+      "nombre": "Producto 111",
+      "categoria": "Categoría C",
+      "cantidad": 11,
+      "precio": 60.5
+    },
+    {
+      "idd": 112,
+      "nombre": "Producto 112",
+      "categoria": "Categoría A",
+      "cantidad": 12,
+      "precio": 61
+    },
+    {
+      "idd": 113,
+      "nombre": "Producto 113",
+      "categoria": "Categoría B",
+      "cantidad": 13,
+      "precio": 61.5
+    },
+    {
+      "idd": 114,
+      "nombre": "Producto 114",
+      "categoria": "Categoría C",
+      "cantidad": 14,
+      "precio": 62
+    },
+    {
+      "idd": 115,
+      "nombre": "Producto 115",
+      "categoria": "Categoría A",
+      "cantidad": 15,
+      "precio": 62.5
+    },
+    {
+      "idd": 116,
+      "nombre": "Producto 116",
+      "categoria": "Categoría B",
+      "cantidad": 16,
+      "precio": 63
+    },
+    {
+      "idd": 117,
+      "nombre": "Producto 117",
+      "categoria": "Categoría C",
+      "cantidad": 17,
+      "precio": 63.5
+    },
+    {
+      "idd": 118,
+      "nombre": "Producto 118",
+      "categoria": "Categoría A",
+      "cantidad": 18,
+      "precio": 64
+    },
+    {
+      "idd": 119,
+      "nombre": "Producto 119",
+      "categoria": "Categoría B",
+      "cantidad": 19,
+      "precio": 64.5
+    },
+    {
+      "idd": 120,
+      "nombre": "Producto 120",
+      "categoria": "Categoría C",
+      "cantidad": 10,
+      "precio": 65
+    },
+    {
+      "idd": 121,
+      "nombre": "Producto 121",
+      "categoria": "Categoría A",
+      "cantidad": 11,
+      "precio": 65.5
+    },
+    {
+      "idd": 122,
+      "nombre": "Producto 122",
+      "categoria": "Categoría B",
+      "cantidad": 12,
+      "precio": 66
+    },
+    {
+      "idd": 123,
+      "nombre": "Producto 123",
+      "categoria": "Categoría C",
+      "cantidad": 13,
+      "precio": 66.5
+    },
+    {
+      "idd": 124,
+      "nombre": "Producto 124",
+      "categoria": "Categoría A",
+      "cantidad": 14,
+      "precio": 67
+    },
+    {
+      "idd": 125,
+      "nombre": "Producto 125",
+      "categoria": "Categoría B",
+      "cantidad": 15,
+      "precio": 67.5
+    },
+    {
+      "idd": 126,
+      "nombre": "Producto 126",
+      "categoria": "Categoría C",
+      "cantidad": 16,
+      "precio": 68
+    },
+    {
+      "idd": 127,
+      "nombre": "Producto 127",
+      "categoria": "Categoría A",
+      "cantidad": 17,
+      "precio": 68.5
+    },
+    {
+      "idd": 128,
+      "nombre": "Producto 128",
+      "categoria": "Categoría B",
+      "cantidad": 18,
+      "precio": 69
+    },
+    {
+      "idd": 129,
+      "nombre": "Producto 129",
+      "categoria": "Categoría C",
+      "cantidad": 19,
+      "precio": 69.5
+    },
+    {
+      "idd": 130,
+      "nombre": "Producto 130",
+      "categoria": "Categoría A",
+      "cantidad": 10,
+      "precio": 70
+    },
+    {
+      "idd": 131,
+      "nombre": "Producto 131",
+      "categoria": "Categoría B",
+      "cantidad": 11,
+      "precio": 70.5
+    },
+    {
+      "idd": 132,
+      "nombre": "Producto 132",
+      "categoria": "Categoría C",
+      "cantidad": 12,
+      "precio": 71
+    },
+    {
+      "idd": 133,
+      "nombre": "Producto 133",
+      "categoria": "Categoría A",
+      "cantidad": 13,
+      "precio": 71.5
+    },
+    {
+      "idd": 134,
+      "nombre": "Producto 134",
+      "categoria": "Categoría B",
+      "cantidad": 14,
+      "precio": 72
+    },
+    {
+      "idd": 135,
+      "nombre": "Producto 135",
+      "categoria": "Categoría C",
+      "cantidad": 15,
+      "precio": 72.5
+    },
+    {
+      "idd": 136,
+      "nombre": "Producto 136",
+      "categoria": "Categoría A",
+      "cantidad": 16,
+      "precio": 73
+    },
+    {
+      "idd": 137,
+      "nombre": "Producto 137",
+      "categoria": "Categoría B",
+      "cantidad": 17,
+      "precio": 73.5
+    },
+    {
+      "idd": 138,
+      "nombre": "Producto 138",
+      "categoria": "Categoría C",
+      "cantidad": 18,
+      "precio": 74
+    },
+    {
+      "idd": 139,
+      "nombre": "Producto 139",
+      "categoria": "Categoría A",
+      "cantidad": 19,
+      "precio": 74.5
+    },
+    {
+      "idd": 140,
+      "nombre": "Producto 140",
+      "categoria": "Categoría B",
+      "cantidad": 10,
+      "precio": 75
+    },
+    {
+      "idd": 141,
+      "nombre": "Producto 141",
+      "categoria": "Categoría C",
+      "cantidad": 11,
+      "precio": 75.5
+    },
+    {
+      "idd": 142,
+      "nombre": "Producto 142",
+      "categoria": "Categoría A",
+      "cantidad": 12,
+      "precio": 76
+    },
+    {
+      "idd": 143,
+      "nombre": "Producto 143",
+      "categoria": "Categoría B",
+      "cantidad": 13,
+      "precio": 76.5
+    },
+    {
+      "idd": 144,
+      "nombre": "Producto 144",
+      "categoria": "Categoría C",
+      "cantidad": 14,
+      "precio": 77
+    },
+    {
+      "idd": 145,
+      "nombre": "Producto 145",
+      "categoria": "Categoría A",
+      "cantidad": 15,
+      "precio": 77.5
+    },
+    {
+      "idd": 146,
+      "nombre": "Producto 146",
+      "categoria": "Categoría B",
+      "cantidad": 16,
+      "precio": 78
+    },
+    {
+      "idd": 147,
+      "nombre": "Producto 147",
+      "categoria": "Categoría C",
+      "cantidad": 17,
+      "precio": 78.5
+    },
+    {
+      "idd": 148,
+      "nombre": "Producto 148",
+      "categoria": "Categoría A",
+      "cantidad": 18,
+      "precio": 79
+    },
+    {
+      "idd": 149,
+      "nombre": "Producto 149",
+      "categoria": "Categoría B",
+      "cantidad": 19,
+      "precio": 79.5
+    },
+    {
+      "idd": 150,
+      "nombre": "Producto 150",
+      "categoria": "Categoría C",
+      "cantidad": 10,
+      "precio": 80
+    },
+    {
+      "idd": 151,
+      "nombre": "Producto 151",
+      "categoria": "Categoría A",
+      "cantidad": 11,
+      "precio": 80.5
+    },
+    {
+      "idd": 152,
+      "nombre": "Producto 152",
+      "categoria": "Categoría B",
+      "cantidad": 12,
+      "precio": 81
+    },
+    {
+      "idd": 153,
+      "nombre": "Producto 153",
+      "categoria": "Categoría C",
+      "cantidad": 13,
+      "precio": 81.5
+    },
+    {
+      "idd": 154,
+      "nombre": "Producto 154",
+      "categoria": "Categoría A",
+      "cantidad": 14,
+      "precio": 82
+    },
+    {
+      "idd": 155,
+      "nombre": "Producto 155",
+      "categoria": "Categoría B",
+      "cantidad": 15,
+      "precio": 82.5
+    },
+    {
+      "idd": 156,
+      "nombre": "Producto 156",
+      "categoria": "Categoría C",
+      "cantidad": 16,
+      "precio": 83
+    },
+    {
+      "idd": 157,
+      "nombre": "Producto 157",
+      "categoria": "Categoría A",
+      "cantidad": 17,
+      "precio": 83.5
+    },
+    {
+      "idd": 158,
+      "nombre": "Producto 158",
+      "categoria": "Categoría B",
+      "cantidad": 18,
+      "precio": 84
+    },
+    {
+      "idd": 159,
+      "nombre": "Producto 159",
+      "categoria": "Categoría C",
+      "cantidad": 19,
+      "precio": 84.5
+    },
+    {
+      "idd": 160,
+      "nombre": "Producto 160",
+      "categoria": "Categoría A",
+      "cantidad": 10,
+      "precio": 85
+    },
+    {
+      "idd": 161,
+      "nombre": "Producto 161",
+      "categoria": "Categoría B",
+      "cantidad": 11,
+      "precio": 85.5
+    },
+    {
+      "idd": 162,
+      "nombre": "Producto 162",
+      "categoria": "Categoría C",
+      "cantidad": 12,
+      "precio": 86
+    },
+    {
+      "idd": 163,
+      "nombre": "Producto 163",
+      "categoria": "Categoría A",
+      "cantidad": 13,
+      "precio": 86.5
+    },
+    {
+      "idd": 164,
+      "nombre": "Producto 164",
+      "categoria": "Categoría B",
+      "cantidad": 14,
+      "precio": 87
+    },
+    {
+      "idd": 165,
+      "nombre": "Producto 165",
+      "categoria": "Categoría C",
+      "cantidad": 15,
+      "precio": 87.5
+    },
+    {
+      "idd": 166,
+      "nombre": "Producto 166",
+      "categoria": "Categoría A",
+      "cantidad": 16,
+      "precio": 88
+    },
+    {
+      "idd": 167,
+      "nombre": "Producto 167",
+      "categoria": "Categoría B",
+      "cantidad": 17,
+      "precio": 88.5
+    },
+    {
+      "idd": 168,
+      "nombre": "Producto 168",
+      "categoria": "Categoría C",
+      "cantidad": 18,
+      "precio": 89
+    },
+    {
+      "idd": 169,
+      "nombre": "Producto 169",
+      "categoria": "Categoría A",
+      "cantidad": 19,
+      "precio": 89.5
+    },
+    {
+      "idd": 170,
+      "nombre": "Producto 170",
+      "categoria": "Categoría B",
+      "cantidad": 10,
+      "precio": 90
+    },
+    {
+      "idd": 171,
+      "nombre": "Producto 171",
+      "categoria": "Categoría C",
+      "cantidad": 11,
+      "precio": 90.5
+    },
+    {
+      "idd": 172,
+      "nombre": "Producto 172",
+      "categoria": "Categoría A",
+      "cantidad": 12,
+      "precio": 91
+    },
+    {
+      "idd": 173,
+      "nombre": "Producto 173",
+      "categoria": "Categoría B",
+      "cantidad": 13,
+      "precio": 91.5
+    },
+    {
+      "idd": 174,
+      "nombre": "Producto 174",
+      "categoria": "Categoría C",
+      "cantidad": 14,
+      "precio": 92
+    },
+    {
+      "idd": 175,
+      "nombre": "Producto 175",
+      "categoria": "Categoría A",
+      "cantidad": 15,
+      "precio": 92.5
+    },
+    {
+      "idd": 176,
+      "nombre": "Producto 176",
+      "categoria": "Categoría B",
+      "cantidad": 16,
+      "precio": 93
+    },
+    {
+      "idd": 177,
+      "nombre": "Producto 177",
+      "categoria": "Categoría C",
+      "cantidad": 17,
+      "precio": 93.5
+    },
+    {
+      "idd": 178,
+      "nombre": "Producto 178",
+      "categoria": "Categoría A",
+      "cantidad": 18,
+      "precio": 94
+    },
+    {
+      "idd": 179,
+      "nombre": "Producto 179",
+      "categoria": "Categoría B",
+      "cantidad": 19,
+      "precio": 94.5
+    },
+    {
+      "idd": 180,
+      "nombre": "Producto 180",
+      "categoria": "Categoría C",
+      "cantidad": 10,
+      "precio": 95
+    },
+    {
+      "idd": 181,
+      "nombre": "Producto 181",
+      "categoria": "Categoría A",
+      "cantidad": 11,
+      "precio": 95.5
+    },
+    {
+      "idd": 182,
+      "nombre": "Producto 182",
+      "categoria": "Categoría B",
+      "cantidad": 12,
+      "precio": 96
+    },
+    {
+      "idd": 183,
+      "nombre": "Producto 183",
+      "categoria": "Categoría C",
+      "cantidad": 13,
+      "precio": 96.5
+    },
+    {
+      "idd": 184,
+      "nombre": "Producto 184",
+      "categoria": "Categoría A",
+      "cantidad": 14,
+      "precio": 97
+    },
+    {
+      "idd": 185,
+      "nombre": "Producto 185",
+      "categoria": "Categoría B",
+      "cantidad": 15,
+      "precio": 97.5
+    },
+    {
+      "idd": 186,
+      "nombre": "Producto 186",
+      "categoria": "Categoría C",
+      "cantidad": 16,
+      "precio": 98
+    },
+    {
+      "idd": 187,
+      "nombre": "Producto 187",
+      "categoria": "Categoría A",
+      "cantidad": 17,
+      "precio": 98.5
+    },
+    {
+      "idd": 188,
+      "nombre": "Producto 188",
+      "categoria": "Categoría B",
+      "cantidad": 18,
+      "precio": 99
+    },
+    {
+      "idd": 189,
+      "nombre": "Producto 189",
+      "categoria": "Categoría C",
+      "cantidad": 19,
+      "precio": 99.5
+    },
+    {
+      "idd": 190,
+      "nombre": "Producto 190",
+      "categoria": "Categoría A",
+      "cantidad": 10,
+      "precio": 100
+    },
+    {
+      "idd": 191,
+      "nombre": "Producto 191",
+      "categoria": "Categoría B",
+      "cantidad": 11,
+      "precio": 100.5
+    },
+    {
+      "idd": 192,
+      "nombre": "Producto 192",
+      "categoria": "Categoría C",
+      "cantidad": 12,
+      "precio": 101
+    },
+    {
+      "idd": 193,
+      "nombre": "Producto 193",
+      "categoria": "Categoría A",
+      "cantidad": 13,
+      "precio": 101.5
+    },
+    {
+      "idd": 194,
+      "nombre": "Producto 194",
+      "categoria": "Categoría B",
+      "cantidad": 14,
+      "precio": 102
+    },
+    {
+      "idd": 195,
+      "nombre": "Producto 195",
+      "categoria": "Categoría C",
+      "cantidad": 15,
+      "precio": 102.5
+    },
+    {
+      "idd": 196,
+      "nombre": "Producto 196",
+      "categoria": "Categoría A",
+      "cantidad": 16,
+      "precio": 103
+    },
+    {
+      "idd": 197,
+      "nombre": "Producto 197",
+      "categoria": "Categoría B",
+      "cantidad": 17,
+      "precio": 103.5
+    },
+    {
+      "idd": 198,
+      "nombre": "Producto 198",
+      "categoria": "Categoría C",
+      "cantidad": 18,
+      "precio": 104
+    },
+    {
+      "idd": 199,
+      "nombre": "Producto 199",
+      "categoria": "Categoría A",
+      "cantidad": 19,
+      "precio": 104.5
+    },
+    {
+      "idd": 200,
+      "nombre": "Producto 200",
+      "categoria": "Categoría B",
+      "cantidad": 10,
+      "precio": 105
+    }
+  ]
+}]

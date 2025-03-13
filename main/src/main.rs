@@ -11,13 +11,13 @@ use std::io;
 
     let inicio=Instant::now();
 //server().
-let mut factory_q=Factory_repository::new(vec!["pueba"]).await;
+let mut factory_q=Factory_repository::new(vec!["prueba"]).await;
 
-let estado=factory_q.get_estado("pueba").unwrap();
+let estado=factory_q.get_estado("prueba").unwrap();
 
+//estado.cargar().await;
 
-
-let lista_medi=vec![("Paracetamol".to_string(),10),("Lisinopril".to_string(),20),("Azitromicina".to_string(),12)];
+let lista_medi=vec![("Producto 1".to_string(),10),("Producto 2".to_string(),20),("Producto 3".to_string(),12)];
 
 let mut list=Vec::new();
 
