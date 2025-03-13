@@ -28,6 +28,8 @@ impl Actor for Session {
                 fut::ready(())
             })
             .wait(ctx);
+
+        ctx.text("la conexion fue exitosa");
     }
 
     

@@ -2,7 +2,7 @@ use super::login::config as config_login;
 use super::Refresh_token::config as config_Refres_token;
 use crate::Middleware::middleware::validador;
 use crate::Websocket::Server::server::Server;
-use crate::Websocket::Session::session::config as config_websocket;
+use crate::Websocket::Session::api::config as config_websocket;
 use actix::Actor;
 use actix_web::middleware::{Compress, Logger};
 use actix_web::{get, web, App, HttpResponse, HttpServer};

@@ -1,16 +1,23 @@
+
 use super::session::Session;
 use actix::prelude::*;
-use actix_web_actors::ws;
-use InterfaceAdapters::{Model::model_farma::Model_farma, DTO::procesar_pedi::Procesar_pedi};
+use actix_web::body::MessageBody;
+use actix_web_actors::ws::{self, WebsocketContext};
+use actix_web::web::Bytes;
+use InterfaceAdapters::{Model::model_farma::Model_farma};
+use InterfaceAdapters::DTO::pedidos::procesar_pedi::Procesar_pedi;
+use InterfaceAdapters::DTO::pedidos::farmacia_pe::Validar_far;
+use InterfaceAdapters::DTO::pedidos::cliente_pe::Pedido;
+use InterfaceAdapters::DTO::pedidos::raideri_pe::Validar_rai;
 
 impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for Session {
     fn handle(&mut self, msg: Result<ws::Message, ws::ProtocolError>, ctx: &mut Self::Context) {
         match msg {
             Ok(ws::Message::Text(text)) => {
                 // Manejar mensajes de texto recibidos
-            let  msg:Model_farma=serde_json::from_str::(text);
-                
-               
+            
+            
+               self.procesar_m(text,ctx);   
                 
             }
             Ok(ws::Message::Binary(bin)) => {
@@ -28,9 +35,22 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for Session {
 
 impl Session {
 
-    pub fn procesar_m(&self,) {
+    pub fn procesar_m<T:AsRef<str>>(&self,text:T,ctx:&mut WebsocketContext<Session>) {
 
+    let msg=serde_json::from_str::<Procesar_pedi>(text.as_ref());
 
+    match msg {
+
+        Ok(Pedido)=>{
+
+            
+            
+        },
+        Ok(validar_rai)=>(),
+        Ok(validar_far)=>(),
+
+        Err(_)=>()
+    }
         
     }
     

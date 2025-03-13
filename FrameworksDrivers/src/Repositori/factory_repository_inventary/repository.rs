@@ -1,3 +1,4 @@
+use std::fs::read_to_string;
 use std::{fs, sync};
 
 
@@ -14,7 +15,7 @@ use mongodb::{
 use ApplicationLayer::Interface::Irepository::Irepository;
 use InterfaceAdapters::{
     Model::model_inventory::Model_inventory,
-    DTO::pedido::{Medicamento, Pedido},
+    DTO::pedidos::cliente_pe::{Pedido,Medicamento}
 };
 
 // Asumiendo que la estructura y demás código ya se definieron
@@ -33,16 +34,22 @@ impl Repositori_inv {
 
         let index_model = IndexModel::builder()
         .keys(doc! {
-            "nombre": 1,
-            "cantidad": 1
+
+            "cantidad": "text"
         })
         .build();
 
         for i in pharmacies.into_iter() {
             let collection: Collection<Model_inventory> = self.database.collection(&i);
 
-            let res = collection.create_index(index_model.clone()).await.unwrap();
-            println!("{}     {:?}",i,res)
+            let res = collection.create_index(index_model.clone()).await;
+            match res {
+                Ok(resp)=>{
+                    let cop=resp.clone();
+                    println!("{}     {:?}",i,cop)},
+                Err(e)=>println!("{}",e)
+            };
+            
         }
     }
 }
@@ -66,15 +73,14 @@ impl Irepository for Repositori_inv {
                 // Disparamos de forma concurrente las búsquedas de cada medicamento en la farmacia actual.
                 let med_futures = meds.into_iter().map(|med| {
 
-                   let medicamento=format!("^{}",med.medicamento);
-
-                    let filter = doc! {
-                        "$and":[doc! {
-                        "nombre": { "$regex": medicamento },
-                        "cantidad": { "$gte": med.cantidad }
-                        }
-                        ]
-                    };
+                        let medicamento=med.medicamento;
+                   
+                        let filter = doc! {
+                            "$and": [
+                                { "nombre":  medicamento  },
+                                { "cantidad": { "$gte": med.cantidad } }
+                            ]
+                        };
                     async {
                         // Si se encuentra algún error o no existe el documento, se refleja en el resultado.
                         collection.find_one(filter).await
@@ -98,7 +104,7 @@ impl Irepository for Repositori_inv {
 
         // Ejecutamos las tareas de farmacia en paralelo, limitando la concurrencia para evitar saturar conexiones
         let results = stream::iter(pharmacy_tasks)
-            .buffer_unordered(20) // Ajusta el número según tu contexto (por ejemplo, número de conexiones disponibles)
+            .buffer_unordered(30) // Ajusta el número según tu contexto (por ejemplo, número de conexiones disponibles)
             .collect::<Vec<_>>()
             .await;
 
@@ -115,3 +121,38 @@ impl Irepository for Repositori_inv {
     }
 }
 
+
+impl Repositori_inv {
+
+    pub async  fn cargar(&self){
+
+
+        let path="Jenzo.json";
+    let DatabaseOptions=read_to_string(path).unwrap();
+
+  let  datos:Vec<Model_inventory>=serde_json::from_str(DatabaseOptions.as_str()).unwrap();
+
+  let mut id=ulid::Generator::new();
+
+  for i in 0..7500{
+
+    let idt=id.generate().unwrap().0.to_string();
+
+  let coll:Collection<Model_inventory>=self.database.collection(&idt);
+
+  let idt=id.generate().unwrap().0.to_string();
+
+coll.insert_many(datos.clone()).await.unwrap();
+
+
+  }
+
+  
+
+
+
+
+
+    }
+    
+}

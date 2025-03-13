@@ -9,7 +9,7 @@ use actix_web_actors::ws;
 
 #[get("/ws")]
 pub async fn ws_index(
-    data:web::Json<WebsocketDTO>,
+    data:web::Query<WebsocketDTO>,
     r: HttpRequest,
     stream: web::Payload,
     srv: web::Data<Addr<Server>>,

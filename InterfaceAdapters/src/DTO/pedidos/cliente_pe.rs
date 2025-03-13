@@ -4,15 +4,16 @@ use serde::{Deserialize, Serialize};
 pub struct Medicamento {
     pub medicamento: String,
     pub cantidad: i32,
+    pub precio:i32,
 }
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize,Clone)]
 
 pub struct Ubicacion {
     pub latitud: f64,
     pub longitud: f64,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize,Clone)]
 
 pub struct Pedido {
     pub id_cliente:String,

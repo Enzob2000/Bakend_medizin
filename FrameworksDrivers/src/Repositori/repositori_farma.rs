@@ -1,13 +1,17 @@
+use std::{fs::read_to_string, os::windows::fs, path};
+
 use actix::fut::err;
 use mongodb::{
     bson::{doc, Document},
     error::Error,
-    options::ClientOptions,
+    options::{ClientOptions, DatabaseOptions},
     Client, Collection, Database,
 };
 
 use ApplicationLayer::Interface::Irepository::Irepository;
-use InterfaceAdapters::Model::model_farma::Model_farma;
+use InterfaceAdapters::Model::{model_farma::Model_farma, model_inventory::Model_inventory};
+
+use super::factory_repository_inventary::repository;
 
 pub struct Repositori_farma {
     database: Database,
@@ -57,3 +61,4 @@ impl Irepository for Repositori_farma {
         Ok(lista)
     }
 }
+

@@ -15,8 +15,6 @@ impl Handler<ClientMessage> for Server {
     type Result = ();
 
     fn handle(&mut self, msg: ClientMessage, _: &mut Context<Self>) {
-        if let Some(id) = self.sessions.write().unwrap().get(&msg.id) {
-            id.do_send(message { 0: msg.msg });
-        }
+       
     }
 }
