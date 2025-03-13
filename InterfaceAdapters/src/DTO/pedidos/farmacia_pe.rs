@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
 
-use super::cliente_pe::{Medicamento, Ubicacion};
+use crate::Model::model_farma::GeoJsonPoint;
+
+use super::cliente_pe::{Medicamento};
 
 #[derive(Deserialize, Serialize,Clone)]
 pub struct Validar_far {
@@ -8,6 +10,6 @@ pub struct Validar_far {
     id_far: String,
     nombre_far: String,
     direccion: String,
-    geolocalizacion: Ubicacion,
+    geolocalizacion: GeoJsonPoint,
     medicamentos: Vec<Medicamento>,
 }

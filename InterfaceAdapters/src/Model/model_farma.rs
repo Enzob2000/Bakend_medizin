@@ -8,8 +8,15 @@ pub struct Model_farma {
     pub nombre: String,
     pub numero_telef:String,
     pub direccion: String,
-    pub latitud: f64,
-    pub longitud: f64,
+    pub ubicacion:GeoJsonPoint,
     pub inventario:Vec<Model_inventory>,
 
+}
+
+
+#[derive(Debug, Serialize, Deserialize,Clone)]
+pub struct GeoJsonPoint {
+    #[serde(rename = "type")]
+    pub geo_type: String, // Siempre será "Point"
+    pub coordinates: [f64; 2], // [longitud, latitud]
 }

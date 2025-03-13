@@ -1,8 +1,8 @@
 
 use std::{sync::Arc, time::Instant, vec};
-use ApplicationLayer::Interface::Irepository::Irepository;
+use ApplicationLayer::Interface::Irepository_farma::Irepository;
 use  FrameworksDrivers::{Api::Server::server,Repositori::factory_repository_inventary::factory_repository::Factory_repository};
-use InterfaceAdapters::DTO::pedidos::cliente_pe::Medicamento;
+use InterfaceAdapters::DTO::pedidos::cliente_pe::{Medicamento, Ubicacion};
 use std::io;
 
 #[actix_web::main]
@@ -14,10 +14,10 @@ use std::io;
 let mut factory_q=Factory_repository::new(vec!["prueba"]).await;
 
 let estado=factory_q.get_estado("prueba").unwrap();
-
+//estado.prueba().await;
 //estado.cargar().await;
-
-let lista_medi=vec![("Producto 1".to_string(),10),("Producto 2".to_string(),20),("Producto 3".to_string(),12)];
+estado.indexar().await;
+let lista_medi=vec![("Producto 100".to_string(),10),("Producto 2".to_string(),10),("Producto 3".to_string(),10)];
 
 let mut list=Vec::new();
 
@@ -31,7 +31,7 @@ list.push(medicamentos);
 
 
 
-let resultado =estado.search(list).await.unwrap();
+let resultado =estado.search(list,Ubicacion{latitud:-73.808577,longitud: 40.848447}).await.unwrap();
 
 println!("{:?}",resultado);
 

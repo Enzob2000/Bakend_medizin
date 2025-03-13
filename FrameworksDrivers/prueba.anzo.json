@@ -6,8 +6,10 @@
   "nombre": "Farmacia Central",
   "numero_telef": "555-1234567",
   "direccion": "Av. Siempre Viva 742",
-  "latitud": 4.132567890123457,
-  "longitud": 2.234567890123457,
+  "ubicacion": {
+    "type": "Point",
+    "coordinates": [-73.856077, 40.848447]
+  },
   "inventario": [
     {
       "idd": 1,

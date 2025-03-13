@@ -14,8 +14,9 @@ use mongodb::{
     error::Error,
     Collection, Database,
 };
-use ApplicationLayer::Interface::Irepository::Irepository;
-use InterfaceAdapters::Model::model_farma::Model_farma;
+use redis::geo;
+use ApplicationLayer::Interface::Irepository_farma::Irepository;
+use InterfaceAdapters::Model::model_farma::{GeoJsonPoint, Model_farma};
 use InterfaceAdapters::{
     Model::model_inventory::Model_inventory,
     DTO::pedidos::cliente_pe::{Medicamento, Pedido},
@@ -29,6 +30,7 @@ pub struct Repositori_inv {
 impl Repositori_inv {
     pub async fn new(cliente: &mongodb::Client, estado: &str) -> Self {
         let database = cliente.database(estado);
+
         Self { database }
     }
 
@@ -38,7 +40,8 @@ impl Repositori_inv {
         let index_model = IndexModel::builder()
             .keys(doc! {
 
-                "cantidad": "text"
+                 "ubicacion": "2dsphere"
+
             })
             .build();
 
@@ -56,47 +59,69 @@ impl Repositori_inv {
         }
     }
 }
+type Geo = GeoJsonPoint;
+type Tinput = Medicamento;
+type Touput = String;
+type Errores = Error;
 
-impl Irepository for Repositori_inv {
-    type Tinput = Medicamento;
-    type Touput = String;
-    type Error = Error;
 
-    async fn search(&mut self, list_m: Vec<Self::Tinput>) -> Result<Vec<Self::Touput>, Error> {
+impl Irepository_farma for Repositori_inv {
+    
+
+    async fn search(&mut self, list_m: Vec<Tinput>,geo:Geo) -> Result<Vec<Touput>, Errores> {
         // Obtener la lista de nombres de colección (cada farmacia)
-        let collection = self.database.collection::<Model_farma>("anzo");
+        let collection = self.database.collection::<Document>("anzo");
 
-        let lista: Vec<Document> = list_m
+        let mut list_f = list_m
             .into_iter()
             .map(|req| {
                 doc! {
-                        "inventario":{
+                    "inventario": {
                         "$elemMatch": {
                             "nombre": req.medicamento,
-                            "cantidad": { "$gte": req.cantidad },
-
+                            "cantidad": { "$gte": req.cantidad }
                         }
                     }
                 }
             })
-            .collect();
+            .collect::<Vec<Document>>();
 
+        let fil_geo = doc! {"ubicacion": {
+            "$near": {
+                "$geometry": {
+                    "type": "Point",
+                    "coordinates": [geo.coordinates[0], geo.coordinates[1]]
+                },
+                "$maxDistance": 5000
+            }
+        }
+        };
+        list_f.push(fil_geo);
         let filtro: Document = doc! {
-            "productos": { "$all": lista }
+                    "$and":list_f
+
+
+
         };
 
-        let option = FindOptions::builder().projection(doc! {"idd":1}).build();
+        let option = FindOptions::builder()
+            .projection(doc! {"id":1,"_id":0})
+            .build();
 
-        let farma=collection.find(filtro).with_options(option).await?;
+        let mut farma = collection.find(filtro).with_options(option).await?;
 
-        let validas=Vec::new();
+        let mut validas = Vec::new();
 
-        while let Ok(far) =farma.current()  {
-            
+        while farma.advance().await? {
+            let filtro = farma.current().get_str("id");
+
+            match filtro {
+                Ok(far) => validas.push(far.to_string()),
+                Err(_) => (),
+            }
         }
 
-
-        Ok(())
+        Ok(validas)
     }
 }
 
@@ -109,10 +134,35 @@ impl Repositori_inv {
 
         let coll = self.database.collection::<Model_farma>("anzo");
 
-        for i in 0..7500 {
+        for i in 0..500 {
             let j = coll.insert_one(datos.clone()).await.unwrap();
 
             println!("{:?}", j);
         }
+    }
+
+    pub async fn prueba(&self) {
+        let command = doc! {
+            "explain": {
+                "find": "anzo", // nombre de la colección
+                "filter": {
+                    "inventario": {
+                        "$elemMatch": {
+                            "nombre": "Producto 1",
+                            "cantidad": { "$gte": 10 }
+                        }
+                    }
+                },
+                "projection": { "id": 1, "_id": 0 }
+            },
+            // La propiedad "verbosity" puede ser "queryPlanner", "executionStats" o "allPlansExecution"
+            "verbosity": "executionStats"
+        };
+
+        // Ejecuta el comando en la base de datos
+        let explain_result = self.database.run_command(command).await.unwrap();
+
+        // Imprime el resultado del explain
+        println!("Resultado de explain: {:#?}", explain_result);
     }
 }

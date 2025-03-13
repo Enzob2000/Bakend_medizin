@@ -16,6 +16,7 @@ pub struct Model_pedido{
 pub cliente:Pedido,
 pub farma:Validar_far,
 pub raideri:Validar_rai,
+pub estado_pedido:EstadoPedido
 
 
 }

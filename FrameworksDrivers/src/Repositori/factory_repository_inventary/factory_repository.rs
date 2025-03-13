@@ -1,4 +1,4 @@
-use ApplicationLayer::Interface::Irepository::Irepository;
+use ApplicationLayer::Interface::Irepository_farma::Irepository;
 
 use super::cliente::Clienteoption;
 use super::repository::Repositori_inv;

@@ -8,7 +8,7 @@ use mongodb::{
     Client, Collection, Database,
 };
 
-use ApplicationLayer::Interface::Irepository::Irepository;
+use ApplicationLayer::Interface::Irepository_farma::Irepository;
 use InterfaceAdapters::Model::{model_farma::Model_farma, model_inventory::Model_inventory};
 
 use super::factory_repository_inventary::repository;
@@ -35,17 +35,18 @@ impl Repositori_farma {
     }
 }
 
-impl Irepository for Repositori_farma {
-    type Error = mongodb::error::Error;
+    type Errores = mongodb::error::Error;
     type Tinput = String;
     type Touput = Model_farma;
 
+impl   Repositori_farma {
+   
   
 
-    async fn search(& mut self, farmacias: Vec<Self::Tinput>) -> Result<Vec<Self::Touput>, Self::Error> {
+    async fn search(& mut self, farmacias: Vec<Tinput>) -> Result<Vec<Touput>, Errores> {
         let mut lista = vec![];
 
-        let collection = self.database.collection::<Self::Touput>("farmacias");
+        let collection = self.database.collection::<Touput>("farmacias");
 
         for farma in farmacias.iter().clone() {
             let filter = doc! {
