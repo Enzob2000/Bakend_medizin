@@ -8,7 +8,7 @@ use mongodb::{
     Client, Collection, Database,
 };
 
-use ApplicationLayer::Interface::Irepository_farma::Irepository;
+
 use InterfaceAdapters::Model::{model_farma::Model_farma, model_inventory::Model_inventory};
 
 use super::factory_repository_inventary::repository;

@@ -1,6 +1,7 @@
 use actix::fut::ok;
 use redis::{aio::MultiplexedConnection, geo, AsyncCommands, Client, Commands, Connection};
-use ApplicationLayer::Interface::Irepository_farma::Irepository;
+
+
 
 pub struct Repositori_localizacion {
     conexion: MultiplexedConnection,

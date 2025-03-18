@@ -1,6 +1,4 @@
-use std::fs::read_to_string;
-use std::{fs, sync};
-
+use async_trait::async_trait;
 use futures::future::join_all;
 use futures::stream::{self, StreamExt};
 use mongodb::options::{
@@ -8,6 +6,8 @@ use mongodb::options::{
     FindOneOptions, FindOptions, IndexOptions,
 };
 use mongodb::IndexModel;
+use std::fs::read_to_string;
+use std::{fs, sync};
 // Para buffering y streams
 use mongodb::{
     bson::{doc, Document},
@@ -15,7 +15,8 @@ use mongodb::{
     Collection, Database,
 };
 use redis::geo;
-use ApplicationLayer::Interface::Irepository_farma::Irepository;
+
+use ApplicationLayer::Interface::irepository_fa::Irepository_pe;
 use InterfaceAdapters::Model::model_farma::{GeoJsonPoint, Model_farma};
 use InterfaceAdapters::{
     Model::model_inventory::Model_inventory,
@@ -25,13 +26,19 @@ use InterfaceAdapters::{
 // Asumiendo que la estructura y demás código ya se definieron
 pub struct Repositori_inv {
     database: Database,
+    collection: Collection<Document>,
 }
 
 impl Repositori_inv {
     pub async fn new(cliente: &mongodb::Client, estado: &str) -> Self {
-        let database = cliente.database(estado);
+        let database = cliente.database("anzo");
 
-        Self { database }
+        let collection = database.collection::<Document>(&estado);
+
+        Self {
+            database: database,
+            collection,
+        }
     }
 
     pub async fn indexar(&self) {
@@ -62,15 +69,12 @@ impl Repositori_inv {
 type Geo = GeoJsonPoint;
 type Tinput = Medicamento;
 type Touput = String;
-type Errores = Error;
 
-
-impl Irepository_farma for Repositori_inv {
+impl Irepository_pe<Tinput, Geo> for Repositori_inv {
     
 
-    async fn search(&mut self, list_m: Vec<Tinput>,geo:Geo) -> Result<Vec<Touput>, Errores> {
+    fn search(&self, list_m: Vec<Tinput>, geo: Geo) -> Result<Vec<Touput>, String> {
         // Obtener la lista de nombres de colección (cada farmacia)
-        let collection = self.database.collection::<Document>("anzo");
 
         let mut list_f = list_m
             .into_iter()
@@ -108,20 +112,26 @@ impl Irepository_farma for Repositori_inv {
             .projection(doc! {"id":1,"_id":0})
             .build();
 
-        let mut farma = collection.find(filtro).with_options(option).await?;
+        async move{
+            let mut farma = self
+                .collection
+                .find(filtro)
+                .with_options(option)
+                .await
+                .unwrap();
 
-        let mut validas = Vec::new();
+            let mut validas = Vec::new();
 
-        while farma.advance().await? {
-            let filtro = farma.current().get_str("id");
+            while farma.advance().await.unwrap() {
+                let filtro = farma.current().get_str("id");
 
-            match filtro {
-                Ok(far) => validas.push(far.to_string()),
-                Err(_) => (),
+                match filtro {
+                    Ok(far) => validas.push(far.to_string()),
+                    Err(_) => (),
+                }
             }
+            Ok(validas)
         }
-
-        Ok(validas)
     }
 }
 

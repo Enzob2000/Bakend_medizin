@@ -4,10 +4,10 @@ use crate::Model::model_farma::GeoJsonPoint;
 
 use super::cliente_pe::{Medicamento};
 
-#[derive(Deserialize, Serialize,Clone)]
+#[derive(Deserialize, Serialize,Clone,Default)]
 pub struct Validar_far {
-    id_orden: String,
-    id_far: String,
+    pub id_orden: String,
+  id_far: String,
     nombre_far: String,
     direccion: String,
     geolocalizacion: GeoJsonPoint,

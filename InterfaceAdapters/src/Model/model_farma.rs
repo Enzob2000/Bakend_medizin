@@ -14,7 +14,7 @@ pub struct Model_farma {
 }
 
 
-#[derive(Debug, Serialize, Deserialize,Clone)]
+#[derive(Debug, Serialize, Deserialize,Clone,Default)]
 pub struct GeoJsonPoint {
     #[serde(rename = "type")]
     pub geo_type: String, // Siempre será "Point"

@@ -1,6 +1,6 @@
 
 use std::{sync::Arc, time::Instant, vec};
-use ApplicationLayer::Interface::Irepository_farma::Irepository;
+use ApplicationLayer::Interface::irepository_farmacia::Irepository;
 use  FrameworksDrivers::{Api::Server::server,Repositori::factory_repository_inventary::factory_repository::Factory_repository};
 use InterfaceAdapters::DTO::pedidos::cliente_pe::{Medicamento, Ubicacion};
 use std::io;
