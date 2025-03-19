@@ -7,6 +7,8 @@ use mongodb::options::{
 };
 use mongodb::IndexModel;
 use std::fs::read_to_string;
+use std::future::Future;
+use std::pin::Pin;
 use std::{fs, sync};
 // Para buffering y streams
 use mongodb::{
@@ -73,7 +75,7 @@ type Touput = String;
 impl Irepository_pe<Tinput, Geo> for Repositori_inv {
     
 
-    fn search(&self, list_m: Vec<Tinput>, geo: Geo) -> Result<Vec<Touput>, String> {
+    fn search(&self, list_m: Vec<Tinput>, geo: Geo) -> Pin<Box<dyn Future<Output = Result<Vec<String>, ()>> + Send>> {
         // Obtener la lista de nombres de colección (cada farmacia)
 
         let mut list_f = list_m
@@ -112,9 +114,10 @@ impl Irepository_pe<Tinput, Geo> for Repositori_inv {
             .projection(doc! {"id":1,"_id":0})
             .build();
 
-        async move{
-            let mut farma = self
-                .collection
+
+             let collection=self.collection.clone();
+       Box::pin( async move{
+            let mut farma = collection
                 .find(filtro)
                 .with_options(option)
                 .await
@@ -131,7 +134,7 @@ impl Irepository_pe<Tinput, Geo> for Repositori_inv {
                 }
             }
             Ok(validas)
-        }
+        })
     }
 }
 

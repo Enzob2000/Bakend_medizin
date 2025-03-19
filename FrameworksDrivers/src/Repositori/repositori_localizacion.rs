@@ -24,7 +24,7 @@ type Error = redis::RedisError;
 impl Repositori_localizacion {
  
 
-    async fn search(& mut self, list: Vec<Tinput>) -> Result<Vec<Touput>, Error> {
+    async fn search(& mut self, list: Tinput) -> Result<Vec<Touput>, Error> {
 
         let lista=self.conexion.geo_radius(
             "lista",
