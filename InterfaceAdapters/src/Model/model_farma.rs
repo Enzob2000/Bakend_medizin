@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 use super::model_inventory::Model_inventory;
 
-#[derive(Deserialize, Serialize,Clone,Debug)]
+#[derive(Deserialize, Serialize,Clone,Debug,Default)]
 pub struct Model_farma {
     pub id: String,
     pub nombre: String,

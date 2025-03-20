@@ -72,10 +72,11 @@ type Geo = GeoJsonPoint;
 type Tinput = Medicamento;
 type Touput = String;
 
+#[async_trait]
 impl Irepository_pe<Tinput, Geo> for Repositori_inv {
     
 
-    fn search(&self, list_m: Vec<Tinput>, geo: Geo) -> Pin<Box<dyn Future<Output = Result<Vec<String>, ()>> + Send>> {
+   async fn search(&self, list_m: Vec<Tinput>, geo: Geo) -> Result<Vec<String>, ()> {
         // Obtener la lista de nombres de colección (cada farmacia)
 
         let mut list_f = list_m
@@ -115,9 +116,8 @@ impl Irepository_pe<Tinput, Geo> for Repositori_inv {
             .build();
 
 
-             let collection=self.collection.clone();
-       Box::pin( async move{
-            let mut farma = collection
+       
+            let mut farma = self.collection
                 .find(filtro)
                 .with_options(option)
                 .await
@@ -134,7 +134,7 @@ impl Irepository_pe<Tinput, Geo> for Repositori_inv {
                 }
             }
             Ok(validas)
-        })
+        
     }
 }
 

@@ -15,8 +15,6 @@ pub struct Medicamento {
 pub struct Pedido {
     pub id:String,
     pub id_cliente:String,
-    pub nombre: String,
-    pub direccion: String,
     pub geolocalizacion: GeoJsonPoint,
     pub medicamentos: Vec<Medicamento>,
 }

@@ -1,7 +1,7 @@
 pub struct Entity_geolocalizacion{
  
- latitud:i64,
- longitud:i64
+ pub latitud:f64,
+ pub longitud:f64
 
 }
 

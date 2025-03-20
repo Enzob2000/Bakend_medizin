@@ -1,6 +1,8 @@
 use actix::fut::ok;
 use redis::{aio::MultiplexedConnection, geo, AsyncCommands, Client, Commands, Connection};
-
+use ApplicationLayer::Interface::irepository_rai::Irepository_rai;
+use EnterpriseLayer::Entity::entity_geolocalizacion::Entity_geolocalizacion;
+use async_trait::async_trait;
 
 
 pub struct Repositori_localizacion {
@@ -17,19 +19,20 @@ impl Repositori_localizacion {
         Self { conexion: con }
     }
 }
-type Tinput = (f64, f64);
+
 type Touput = String;
 type Error = redis::RedisError;
 
-impl Repositori_localizacion {
+#[async_trait]
+impl  Irepository_rai<Entity_geolocalizacion> for Repositori_localizacion {
  
 
-    async fn search(& mut self, list: Tinput) -> Result<Vec<Touput>, Error> {
+    async fn search(&mut self, list: Entity_geolocalizacion) -> Result<Vec<Touput>, ()> {
 
         let lista=self.conexion.geo_radius(
             "lista",
-            list[0].0,
-            list[0].1,
+            list.latitud,
+            list.longitud,
             10.0,
             geo::Unit::Kilometers,
             geo::RadiusOptions::default(),

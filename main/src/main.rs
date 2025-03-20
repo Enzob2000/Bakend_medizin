@@ -13,7 +13,7 @@ use std::io;
 //server().
 let mut factory_q=Factory_repository::new(vec!["prueba"]).await;
 
-let estado=factory_q.get_estado("prueba").unwrap();
+let mut estado=factory_q.get_estado("prueba").unwrap();
 //estado.prueba().await;
 //estado.cargar().await;
 estado.indexar().await;
