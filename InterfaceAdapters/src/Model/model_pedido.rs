@@ -30,6 +30,18 @@ pub estado_pedido:EstadoPedido
 
 
 }
+
+
+
+pub struct Model_Farma {
+    pub id: String,
+    pub nombre: String,
+    pub numero_telef:String,
+    pub direccion: String,
+    pub ubicacion:[f64;2],
+    
+
+}
 #[derive(Deserialize,Serialize,Clone,Default)]
 
 pub struct Destino{

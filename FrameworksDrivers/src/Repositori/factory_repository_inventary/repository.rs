@@ -6,6 +6,7 @@ use mongodb::options::{
     FindOneOptions, FindOptions, IndexOptions,
 };
 use mongodb::IndexModel;
+use ApplicationLayer::Interface::irepository::irepository_fa::Irepository_pe;
 use std::fs::read_to_string;
 use std::future::Future;
 use std::pin::Pin;
@@ -18,7 +19,7 @@ use mongodb::{
 };
 use redis::geo;
 
-use ApplicationLayer::Interface::irepository_fa::Irepository_pe;
+
 use InterfaceAdapters::Model::model_farma::{GeoJsonPoint, Model_farma};
 use InterfaceAdapters::{
     Model::model_inventory::Model_inventory,

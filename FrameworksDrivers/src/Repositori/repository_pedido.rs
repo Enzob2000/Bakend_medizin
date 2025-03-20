@@ -1,6 +1,7 @@
+use actix::fut::ok;
 use async_trait::async_trait;
 use mongodb::{
-    bson::{doc, to_document},
+    bson::{doc, to_document, Document},
     options::ClientOptions,
     Client, Collection,
 };
@@ -12,16 +13,17 @@ use std::{
     process::Output,
 };
 use ulid::{Generator, Ulid};
-use ApplicationLayer::Interface::irepository_orden::Irepository_orden;
+use ApplicationLayer::Interface::irepository::irepository_orden::Irepository_orden;
+
 use InterfaceAdapters::{
-    Model::model_pedido::Model_pedido,
+    Model::{model_cliente::ModelCliente, model_pedido::Model_Pedido},
     DTO::pedidos::{cliente_pe::Pedido, procesar_pedi::Procesar_pedi},
 };
 
 use super::factory_repository_inventary::cliente::{self, Clienteoption};
 
 pub struct Repository_orde {
-    colletion: Collection<Model_pedido>,
+    colletion: Collection<Model_Pedido>,
     ids: Generator,
 }
 
@@ -30,7 +32,7 @@ impl Repository_orde {
         let collection = cliente
             .cliente
             .database("info")
-            .collection::<Model_pedido>("pedidos");
+            .collection::<Model_Pedido>("pedidos");
 
         let id = ulid::Generator::new();
 
@@ -42,9 +44,9 @@ impl Repository_orde {
 }
 
 #[async_trait]
-impl Irepository_orden<Procesar_pedi> for Repository_orde {
+impl Irepository_orden<Document> for Repository_orde {
     async fn create(&mut self) {
-        let mut pedido_defa = Model_pedido::default();
+        let mut pedido_defa = Model_Pedido::default();
 
         let id = self.ids.generate().unwrap().to_string();
         pedido_defa.id = id;
@@ -63,18 +65,12 @@ impl Irepository_orden<Procesar_pedi> for Repository_orde {
         }
     }
 
-    async fn update(&self, entidad: String, cliente: Procesar_pedi, id: String) {
-        let documento = match cliente {
-            Procesar_pedi::Cliente_pe(cli) => to_document(&cli).unwrap(),
-            Procesar_pedi::Faemacia_pe(fa) => to_document(&fa).unwrap(),
-            Procesar_pedi::Raideri_pe(ra) => to_document(&ra).unwrap(),
-        };
-
+    async fn update(&self, entidad: String, info: Document, id: String) {
         let filtro = doc! {"id":id};
 
         let update = doc! {
            "$set":{
-          entidad:documento
+          entidad:info
            }
         };
 
