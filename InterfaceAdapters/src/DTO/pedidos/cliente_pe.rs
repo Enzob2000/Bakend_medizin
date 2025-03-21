@@ -12,7 +12,7 @@ pub struct Medicamento {
 
 #[derive(Serialize, Deserialize,Clone,Default)]
 
-pub struct Pedido {
+pub struct DTOPedido {
     pub id:String,
     pub id_cliente:String,
     pub geolocalizacion: GeoJsonPoint,

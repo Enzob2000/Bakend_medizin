@@ -6,7 +6,9 @@ use mongodb::options::{
     FindOneOptions, FindOptions, IndexOptions,
 };
 use mongodb::IndexModel;
-use ApplicationLayer::Interface::irepository::irepository_fa::Irepository_pe;
+use ApplicationLayer::Interface::pedidos::irepository::irepository_fa::Irepository_pe;
+use InterfaceAdapters::DTO::pedidos::cliente_pe::Medicamento;
+
 use std::fs::read_to_string;
 use std::future::Future;
 use std::pin::Pin;
@@ -23,7 +25,7 @@ use redis::geo;
 use InterfaceAdapters::Model::model_farma::{GeoJsonPoint, Model_farma};
 use InterfaceAdapters::{
     Model::model_inventory::Model_inventory,
-    DTO::pedidos::cliente_pe::{Medicamento, Pedido},
+ 
 };
 
 // Asumiendo que la estructura y demás código ya se definieron

@@ -1,14 +1,16 @@
 use serde::{Deserialize, Serialize};
 
-use super::{cliente_pe::Pedido, farmacia_pe::Validar_far, raideri_pe::Validar_rai};
+use super::{cliente_pe::DTOPedido, farmacia_pe::DTOfarma, raideri_pe::DTOrai};
+
+
 
 
 
 #[derive(Deserialize, Serialize)]
 #[serde(untagged)]
-pub enum Procesar_pedi {
-    Cliente_pe(Pedido),
-    Raideri_pe(Validar_rai),
-    Faemacia_pe(Validar_far),
+pub enum DTOprocesar_pedi {
+    Cliente_pe(DTOPedido),
+    Raideri_pe(DTOrai),
+    Faemacia_pe(DTOfarma),
     
 }

@@ -6,6 +6,7 @@ use mongodb::{
     Client, Collection,
 };
 use serde::Serialize;
+use ApplicationLayer::Interface::pedidos::irepository::irepository_orden::Irepository_orden;
 use std::{
     any::{type_name, type_name_of_val},
     future::Future,
@@ -13,18 +14,18 @@ use std::{
     process::Output,
 };
 use ulid::{Generator, Ulid};
-use ApplicationLayer::Interface::irepository::irepository_orden::Irepository_orden;
+
 
 use InterfaceAdapters::{
     Model::{model_cliente::ModelCliente, model_pedido::Model_Pedido},
-    DTO::pedidos::{cliente_pe::Pedido, procesar_pedi::Procesar_pedi},
+    
 };
 
 use super::factory_repository_inventary::cliente::{self, Clienteoption};
 
 pub struct Repository_orde {
     colletion: Collection<Model_Pedido>,
-    ids: Generator,
+   
 }
 
 impl Repository_orde {
@@ -34,24 +35,32 @@ impl Repository_orde {
             .database("info")
             .collection::<Model_Pedido>("pedidos");
 
-        let id = ulid::Generator::new();
+        
 
         Self {
             colletion: collection,
-            ids: id,
+           
         }
     }
 }
 
 #[async_trait]
-impl Irepository_orden<Document> for Repository_orde {
-    async fn create(&mut self) {
+impl Irepository_orden<Document,ModelCliente> for Repository_orde {
+
+
+    async fn create(&mut self,cliente:ModelCliente)->Result<String,()> {
+
         let mut pedido_defa = Model_Pedido::default();
 
-        let id = self.ids.generate().unwrap().to_string();
-        pedido_defa.id = id;
+        pedido_defa.cliente=cliente;
 
-        self.colletion.insert_one(pedido_defa).await.unwrap();
+    
+        let id = Ulid::new().to_string();
+        pedido_defa.id = id.clone();
+
+        self.colletion.insert_one(pedido_defa).await.map_err(|_|())?;
+
+        Ok(id)
     }
 
     async fn delete(&self, id: String) -> Result<String, String> {

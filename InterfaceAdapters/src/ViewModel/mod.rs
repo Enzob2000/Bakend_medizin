@@ -1,1 +1,1 @@
-pub mod viewmodel_pedidos;
+pub mod pedidos;

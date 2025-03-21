@@ -4,7 +4,7 @@ use crate::DTO::pedidos::cliente_pe::Medicamento;
 
 #[derive(Deserialize, Serialize, Clone, Default)]
 
-pub struct PresentRaider {
+pub struct ViewmodelRaider {
     pub id: String,
     pub medicamentos: Vec<Medicamento>,
     pub nombre_farma: String,
