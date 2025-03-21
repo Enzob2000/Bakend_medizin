@@ -1,3 +1,4 @@
+
 pub struct Entity_medicamento{
 
     pub nombre:String,

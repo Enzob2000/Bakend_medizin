@@ -3,11 +3,9 @@ use actix::prelude::*;
 use actix_web::body::MessageBody;
 use actix_web::web::Bytes;
 use actix_web_actors::ws::{self, WebsocketContext};
-use InterfaceAdapters::Model::model_farma::Model_farma;
-use InterfaceAdapters::DTO::pedidos::cliente_pe::Pedido;
-use InterfaceAdapters::DTO::pedidos::farmacia_pe::Validar_far;
-use InterfaceAdapters::DTO::pedidos::procesar_pedi::Procesar_pedi;
-use InterfaceAdapters::DTO::pedidos::raideri_pe::Validar_rai;
+use InterfaceAdapters::{
+    Model::model_farma::Model_farma, DTO::pedidos::procesar_pedi::DTOprocesar_pedi,
+};
 
 impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for Session {
     fn handle(&mut self, msg: Result<ws::Message, ws::ProtocolError>, ctx: &mut Self::Context) {
@@ -32,13 +30,12 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for Session {
 
 impl Session {
     pub fn procesar_m<T: AsRef<str>>(&self, text: T, ctx: &mut WebsocketContext<Session>) {
-        let msg = serde_json::from_str::<Procesar_pedi>(text.as_ref());
+        let msg = serde_json::from_str::<DTOprocesar_pedi>(text.as_ref());
 
         match msg {
-            Ok(Procesar_pedi::Cliente_pe(pe)) => {
-            }
-            Ok(Procesar_pedi::Raideri_pe(rai)) => (),
-            Ok(Procesar_pedi::Faemacia_pe(far)) => (),
+            Ok(DTOprocesar_pedi::Cliente_pe(pe)) => {}
+            Ok(DTOprocesar_pedi::Raideri_pe(rai)) => (),
+            Ok(DTOprocesar_pedi::Faemacia_pe(far)) => (),
 
             Err(_) => (),
         }

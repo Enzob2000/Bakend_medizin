@@ -7,6 +7,7 @@ use mongodb::options::{
 };
 use mongodb::IndexModel;
 use ApplicationLayer::Interface::pedidos::irepository::irepository_fa::Irepository_pe;
+use EnterpriseLayer::Entity::entity_pedido::BusquedaMedi;
 use InterfaceAdapters::DTO::pedidos::cliente_pe::Medicamento;
 
 use std::fs::read_to_string;
@@ -72,23 +73,23 @@ impl Repositori_inv {
     }
 }
 type Geo = GeoJsonPoint;
-type Tinput = Medicamento;
+type Tinput = BusquedaMedi;
 type Touput = String;
 
 #[async_trait]
-impl Irepository_pe<Tinput, Geo> for Repositori_inv {
+impl Irepository_pe<Tinput> for Repositori_inv {
     
 
-   async fn search(&self, list_m: Vec<Tinput>, geo: Geo) -> Result<Vec<String>, ()> {
+   async fn search(&self, busqueda:Tinput) -> Result<Vec<String>, ()> {
         // Obtener la lista de nombres de colección (cada farmacia)
 
-        let mut list_f = list_m
+        let mut list_f = busqueda.medicamentos
             .into_iter()
             .map(|req| {
                 doc! {
                     "inventario": {
                         "$elemMatch": {
-                            "nombre": req.medicamento,
+                            "nombre": req.nombre,
                             "cantidad": { "$gte": req.cantidad }
                         }
                     }
