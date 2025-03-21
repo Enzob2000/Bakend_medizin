@@ -7,7 +7,8 @@ use mongodb::options::{
 };
 use mongodb::IndexModel;
 use ApplicationLayer::Interface::pedidos::irepository::irepository_fa::Irepository_pe;
-use EnterpriseLayer::Entity::entity_pedido::BusquedaMedi;
+
+use EnterpriseLayer::Entity::entity_pedido::Pedido;
 use InterfaceAdapters::DTO::pedidos::cliente_pe::Medicamento;
 
 use std::fs::read_to_string;
@@ -73,7 +74,7 @@ impl Repositori_inv {
     }
 }
 type Geo = GeoJsonPoint;
-type Tinput = BusquedaMedi;
+type Tinput = Pedido;
 type Touput = String;
 
 #[async_trait]
@@ -90,7 +91,7 @@ impl Irepository_pe<Tinput> for Repositori_inv {
                     "inventario": {
                         "$elemMatch": {
                             "nombre": req.nombre,
-                            "cantidad": { "$gte": req.cantidad }
+                            "cantidad": { "$gte": req.cantidad as i32 }
                         }
                     }
                 }
@@ -101,7 +102,7 @@ impl Irepository_pe<Tinput> for Repositori_inv {
             "$near": {
                 "$geometry": {
                     "type": "Point",
-                    "coordinates": [geo.coordinates[0], geo.coordinates[1]]
+                    "coordinates": [busqueda.latitud,busqueda.longitud]
                 },
                 "$maxDistance": 5000
             }

@@ -45,7 +45,7 @@ impl RepositoryInfo {
 
 #[async_trait]
 impl IrepositoryInfo<Document> for RepositoryInfo {
-    async fn read(&self, id: String) -> Result<Document, ()> {
+    async fn read(&self, id: String) -> Result<Document, String> {
         let filter = doc! {"id":id.clone()};
 
         let collection = match id{
@@ -59,10 +59,17 @@ impl IrepositoryInfo<Document> for RepositoryInfo {
             .projection(doc! {"inventario":0})
             .await;
 
-        match result {
-            Ok(Some(j)) => Ok(j),
-            Ok(None) => Err(()),
-            Err(_) => Err(()),
-        }
+        let document=match result {
+            Ok(Some(j)) => j,
+            Ok(None) => return Err("No exixtes el documento".to_string()),
+            Err(_) =>return Err("No exixtes el documento".to_string()),
+        };
+          
+       match document.remove("_id") {
+           Some(_) => (),
+           None =>return  Err("No existe el _id".to_string())
+       };
+
+       Ok(document)
     }
 }

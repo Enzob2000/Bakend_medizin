@@ -14,8 +14,9 @@ pub struct PresentFarmapart1{
 pub struct PresentFarmapart2{
     pub id:String,
     pub medicamentos:Vec<Medicamento>,
-    pub id_rai:String,
     pub nombre_rai:String,
-    pub  geolocalizacion:[f64;2]
+    pub cedula:String,
+    pub latitud:f64,
+    pub longitud:f64
 
 }

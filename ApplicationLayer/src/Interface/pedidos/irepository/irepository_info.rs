@@ -4,7 +4,7 @@ use serde::Serialize;
 #[async_trait]
 pub trait IrepositoryInfo <T:Serialize>{
 
-    async fn read(&self,id:String)->Result<T,()>;
+    async fn read(&self,id:String)->Result<T,String>;
 
     
 }

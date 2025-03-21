@@ -4,6 +4,8 @@ use super::model_inventory::Model_inventory;
 
 #[derive(Deserialize, Serialize,Clone,Debug,Default)]
 pub struct Model_farma {
+
+    pub tipo:String,
     pub id: String,
     pub nombre: String,
     pub numero_telef:String,

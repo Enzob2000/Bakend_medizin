@@ -1,25 +1,19 @@
 use actix::fut::ok;
 use async_trait::async_trait;
 use mongodb::{
-    bson::{doc, to_document, Document},
+    bson::{doc, from_bson_with_options, from_document, to_bson, to_document, Document},
     options::ClientOptions,
     Client, Collection,
 };
-use serde::Serialize;
+use serde::{de::DeserializeOwned, Serialize};
 use ApplicationLayer::Interface::pedidos::irepository::irepository_orden::Irepository_orden;
 use std::{
-    any::{type_name, type_name_of_val},
-    future::Future,
-    pin::Pin,
-    process::Output,
+    any::{type_name, type_name_of_val}, default, future::Future, pin::Pin, process::Output
 };
 use ulid::{Generator, Ulid};
 
 
-use InterfaceAdapters::{
-    Model::{model_cliente::ModelCliente, model_pedido::Model_Pedido},
-    
-};
+use InterfaceAdapters::Model::{model_cliente::ModelCliente, model_pedido::{EstadoPedido, Model_Farma, Model_Pedido}, model_raideri::ModelRaider};
 
 use super::factory_repository_inventary::cliente::{self, Clienteoption};
 
@@ -45,14 +39,13 @@ impl Repository_orde {
 }
 
 #[async_trait]
-impl Irepository_orden<Document,ModelCliente> for Repository_orde {
+impl Irepository_orden<Document> for Repository_orde {
 
 
-    async fn create(&mut self,cliente:ModelCliente)->Result<String,()> {
+    async fn create(&mut self,cliente:Document)->Result<String,()> {
 
         let mut pedido_defa = Model_Pedido::default();
 
-        pedido_defa.cliente=cliente;
 
     
         let id = Ulid::new().to_string();
@@ -60,29 +53,66 @@ impl Irepository_orden<Document,ModelCliente> for Repository_orde {
 
         self.colletion.insert_one(pedido_defa).await.map_err(|_|())?;
 
+        self.update(cliente, id.clone()).await.map_err(|_|())?;
+
         Ok(id)
     }
 
-    async fn delete(&self, id: String) -> Result<String, String> {
-        let filtro = doc! { "id": id };
+    async fn delete(&self, id_pe: String,id_ente:String) -> Result<String, String> {
 
-        let collection = self.colletion.clone();
+        let default = match id_ente{
+            s if s.starts_with("cli") => to_document(&ModelCliente::default()),
+            s if s.starts_with("fa") => to_document(&Model_Farma::default()),
+            _ => to_document(&ModelRaider::default()),
+        };
 
-        match collection.delete_one(filtro).await {
-            Ok(_) => return Ok("El pedido fue eliminado".to_string()),
-            Err(_) => return Err("El pedido no pudo ser eliminado".to_string()),
+        let docu=match default {
+            Ok(d) => d,
+            Err(_) => return Err("No se pudo borrar los datos".to_string()),
+        };
+            
+    
+
+        match self.update(docu, id_pe).await {
+            Ok(_) => Ok("Se actualizo correctamente el pedido".to_string()),
+            Err(e) => Err(e),
         }
+
+        
     }
 
-    async fn update(&self, entidad: String, info: Document, id: String) {
+    async fn update(&self,  info: Document, id: String)->Result<(),String> {
         let filtro = doc! {"id":id};
+
+        let infor=info.clone();
+
+        let entidad=match info.get_str("tipo") {
+            Ok(enti) => enti,
+            Err(_) => return Err("No se encontro el tipo".to_string()),
+        };
+        
+        let tipo=infor.get_str("tipo").unwrap();
+
+        let estado=match tipo {
+            "cliente"=>EstadoPedido::PedidoEntrante,
+            "raider"=>EstadoPedido::BusquedaRaideri,
+            _=>EstadoPedido::BusquedaFarmacia
+
+            
+        };
+
+        let estado=to_bson(&estado).unwrap();
 
         let update = doc! {
            "$set":{
-          entidad:info
+          entidad:infor,
+          "estado":estado
            }
         };
 
-        self.colletion.update_one(filtro, update).await.unwrap();
+        match self.colletion.update_one(filtro, update).await {
+            Ok(_) => Ok(()),
+            Err(_) => Err("NO se pudo actualizar la orden".to_string()),
+        }
     }
 }

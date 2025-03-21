@@ -1,11 +1,10 @@
 use serde::{Deserialize, Serialize};
 
-use crate::Model::model_farma::GeoJsonPoint;
 
 #[derive(Serialize, Deserialize,Clone,Default)]
 pub struct Medicamento {
     pub medicamento: String,
-    pub cantidad: u8,
+    pub cantidad: i8,
  
 }
 
