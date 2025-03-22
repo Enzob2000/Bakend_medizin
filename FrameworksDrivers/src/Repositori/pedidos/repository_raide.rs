@@ -1,7 +1,7 @@
 use actix::fut::ok;
 use redis::{aio::MultiplexedConnection, geo, AsyncCommands, Client, Commands, Connection};
 
-use ApplicationLayer::Interface::pedidos::irepository::irepository_rai::Irepository_rai;
+use ApplicationLayer::Interface::pedidos::irepository::irepository_rai::{IrepositoryRai};
 
 use async_trait::async_trait;
 use EnterpriseLayer::Entity::{
@@ -22,7 +22,7 @@ impl RepositoriRai {
 }
 
 #[async_trait]
-impl Irepository_rai<Geolocalizacion> for RepositoriRai {
+impl IrepositoryRai<Geolocalizacion> for RepositoriRai {
     async fn search(&mut self, list: Geolocalizacion) -> Result<Vec<String>, String> {
         let lista = self
             .conexion

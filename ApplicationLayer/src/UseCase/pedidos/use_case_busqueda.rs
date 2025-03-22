@@ -1,13 +1,13 @@
 use EnterpriseLayer::Entity::{entity_geolocalizacion::Geolocalizacion, entity_pedido::Pedido};
 
-use crate::Interface::{imapper::Imapper, pedidos::irepository::{irepository_fa::Irepository_pe, irepository_rai::Irepository_rai}};
+use crate::Interface::{imapper::Imapper, pedidos::irepository::{irepository_fa::IrepositoryFa, irepository_rai::IrepositoryRai}};
 
 
 pub struct UseCaseBusque<TinputF,TinputR>{
 
-    repository_farma:Box<dyn Irepository_pe<Pedido>>,
+    repository_farma:Box<dyn IrepositoryFa<Pedido>>,
     mapper_farma:Box<dyn Imapper<TinputF,Pedido>>,
-    repository_rai:Box<dyn Irepository_rai<Geolocalizacion>>,
+    repository_rai:Box<dyn IrepositoryRai<Geolocalizacion>>,
     mapper_rai:Box<dyn Imapper<TinputR,Geolocalizacion>>
 }
 

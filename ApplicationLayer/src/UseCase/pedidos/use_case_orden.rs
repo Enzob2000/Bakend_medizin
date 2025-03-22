@@ -4,13 +4,13 @@ use EnterpriseLayer::Entity::entity_entidades::Entidades;
 use crate::Interface::{
     imapper::Imapper,
     pedidos::irepository::{
-        irepository_fa::Irepository_pe, irepository_info::IrepositoryInfo,
-        irepository_orden::Irepository_orden, irepository_rai::Irepository_rai,
+        irepository_fa::IrepositoryFa, irepository_info::IrepositoryInfo,
+        irepository_orden::IrepositoryOrden, irepository_rai::IrepositoryRai,
     },
 };
 
 pub struct UseCaseGestionar<Strut> {
-    repositori_orden: Box<dyn Irepository_orden<Strut, Vec<Entidades>>>,
+    repositori_orden: Box<dyn IrepositoryOrden<Strut, Vec<Entidades>>>,
     repositori_info: Box<dyn IrepositoryInfo<Strut>>,
 }
 

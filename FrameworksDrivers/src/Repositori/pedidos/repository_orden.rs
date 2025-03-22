@@ -15,7 +15,7 @@ use std::{
     process::Output,
 };
 use ulid::{Generator, Ulid};
-use ApplicationLayer::Interface::pedidos::irepository::irepository_orden::Irepository_orden;
+use ApplicationLayer::Interface::pedidos::irepository::irepository_orden::{ IrepositoryOrden};
 
 use InterfaceAdapters::Model::{
     model_cliente::ModelCliente,
@@ -43,7 +43,7 @@ impl RepositoryOrde {
 }
 
 #[async_trait]
-impl Irepository_orden<Document,Vec<Entidades>> for RepositoryOrde {
+impl IrepositoryOrden<Document,Vec<Entidades>> for RepositoryOrde {
 
     async fn read(&self,id_pe:String)->Result<Vec<Entidades>,String>{
      let filtro=doc! {

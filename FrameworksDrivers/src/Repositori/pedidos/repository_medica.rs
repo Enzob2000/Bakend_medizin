@@ -6,7 +6,7 @@ use mongodb::options::{
     FindOneOptions, FindOptions, IndexOptions,
 };
 use mongodb::IndexModel;
-use ApplicationLayer::Interface::pedidos::irepository::irepository_fa::Irepository_pe;
+use ApplicationLayer::Interface::pedidos::irepository::irepository_fa::IrepositoryFa;
 
 use EnterpriseLayer::Entity::entity_pedido::Pedido;
 use InterfaceAdapters::DTO::pedidos::cliente_pe::Medicamento;
@@ -71,7 +71,7 @@ impl RepositoriMedi {
 }
 
 #[async_trait]
-impl Irepository_pe<Pedido> for RepositoriMedi {
+impl IrepositoryFa<Pedido> for RepositoriMedi {
     async fn search(&self, busqueda: Pedido) -> Result<Vec<String>, String> {
         // Obtener la lista de nombres de colección (cada farmacia)
 

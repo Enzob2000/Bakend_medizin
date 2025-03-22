@@ -3,7 +3,7 @@ use async_trait::async_trait;
 use serde::{ser::{SerializeStruct, SerializeStructVariant}, Serialize, Serializer};
 
 #[async_trait]
-pub trait Irepository_orden<Cliente,Ente>:Send+Sync {
+pub trait IrepositoryOrden<Cliente,Ente>:Send+Sync {
 
     
     async fn read(& self,id_pe:String,)->Result<Ente,String>;
