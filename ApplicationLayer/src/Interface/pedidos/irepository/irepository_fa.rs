@@ -6,6 +6,6 @@ pub trait Irepository_pe<Tinput>:Send+Sync {
     
     
    
-   async  fn search(&self,busqueda:Tinput)->Result<Vec<String>,()>;
+   async  fn search(&self,busqueda:Tinput)->Result<Vec<String>,String>;
     
 }

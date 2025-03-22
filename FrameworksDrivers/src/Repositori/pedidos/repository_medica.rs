@@ -23,20 +23,16 @@ use mongodb::{
 };
 use redis::geo;
 
-
 use InterfaceAdapters::Model::model_farma::{GeoJsonPoint, Model_farma};
-use InterfaceAdapters::{
-    Model::model_inventory::Model_inventory,
- 
-};
+use InterfaceAdapters::Model::model_inventory::Model_inventory;
 
 // Asumiendo que la estructura y demás código ya se definieron
-pub struct Repositori_inv {
+pub struct RepositoriMedi {
     database: Database,
     collection: Collection<Document>,
 }
 
-impl Repositori_inv {
+impl RepositoriMedi {
     pub async fn new(cliente: &mongodb::Client, estado: &str) -> Self {
         let database = cliente.database("anzo");
 
@@ -73,18 +69,14 @@ impl Repositori_inv {
         }
     }
 }
-type Geo = GeoJsonPoint;
-type Tinput = Pedido;
-type Touput = String;
 
 #[async_trait]
-impl Irepository_pe<Tinput> for Repositori_inv {
-    
-
-   async fn search(&self, busqueda:Tinput) -> Result<Vec<String>, ()> {
+impl Irepository_pe<Pedido> for RepositoriMedi {
+    async fn search(&self, busqueda: Pedido) -> Result<Vec<String>, String> {
         // Obtener la lista de nombres de colección (cada farmacia)
 
-        let mut list_f = busqueda.medicamentos
+        let mut list_f = busqueda
+            .medicamentos
             .into_iter()
             .map(|req| {
                 doc! {
@@ -120,30 +112,26 @@ impl Irepository_pe<Tinput> for Repositori_inv {
             .projection(doc! {"id":1,"_id":0})
             .build();
 
+        let mut farma = match self.collection.find(filtro).with_options(option).await {
+            Ok(o) => o,
+            Err(_) => return Err("La busqueda de los medicamentos fallo".to_string()),
+        };
 
-       
-            let mut farma = self.collection
-                .find(filtro)
-                .with_options(option)
-                .await
-                .unwrap();
+        let mut validas = Vec::new();
 
-            let mut validas = Vec::new();
+        while farma.advance().await.unwrap() {
+            let filtro = farma.current().get_str("id");
 
-            while farma.advance().await.unwrap() {
-                let filtro = farma.current().get_str("id");
-
-                match filtro {
-                    Ok(far) => validas.push(far.to_string()),
-                    Err(_) => (),
-                }
+            match filtro {
+                Ok(far) => validas.push(far.to_string()),
+                Err(_) => (),
             }
-            Ok(validas)
-        
+        }
+        Ok(validas)
     }
 }
 
-impl Repositori_inv {
+impl RepositoriMedi {
     pub async fn cargar(&self) {
         let path = "C:/Users/HP/proyectos rust/Backed_medizin/FrameworksDrivers/enzo.json";
         let DatabaseOptions = read_to_string(path).unwrap();

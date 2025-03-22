@@ -1,4 +1,4 @@
-pub struct Entity_geolocalizacion{
+pub struct Geolocalizacion{
  
  pub latitud:f64,
  pub longitud:f64

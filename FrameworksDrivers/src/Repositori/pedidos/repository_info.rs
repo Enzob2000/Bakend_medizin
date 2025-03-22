@@ -59,7 +59,7 @@ impl IrepositoryInfo<Document> for RepositoryInfo {
             .projection(doc! {"inventario":0})
             .await;
 
-        let document=match result {
+        let mut document=match result {
             Ok(Some(j)) => j,
             Ok(None) => return Err("No exixtes el documento".to_string()),
             Err(_) =>return Err("No exixtes el documento".to_string()),

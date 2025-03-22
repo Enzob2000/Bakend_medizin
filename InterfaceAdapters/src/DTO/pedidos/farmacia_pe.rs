@@ -8,5 +8,7 @@ use super::cliente_pe::{Medicamento};
 pub struct DTOfarma {
     pub id_orden: String,
     pub id_far: String,
+    pub latitud:f64,
+    pub longitud:f64
     
 }
