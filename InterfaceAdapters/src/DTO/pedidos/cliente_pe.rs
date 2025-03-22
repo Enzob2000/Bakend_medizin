@@ -22,8 +22,8 @@ pub struct DTOPedido {
 }
 
 #[derive(Serialize, Deserialize,Clone)]
-enum Tipo {
-    Delivery,
-    PickUp
+pub enum Tipo {
+     Delivery,
+     PickUp
     
 }
